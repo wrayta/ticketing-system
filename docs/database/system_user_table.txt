@@ -1,0 +1,25 @@
+CREATE EXTENSION citext;
+
+CREATE TABLE system_user
+(
+id SERIAL PRIMARY KEY,
+email citext NOT NULL UNIQUE,
+password VARCHAR NOT NULL,
+first_name VARCHAR NOT NULL,
+last_name VARCHAR NOT NULL
+);
+
+                                                    Table "public.system_user"
+   Column   |       Type        |                        Modifiers                         | Storage  | Stats target | Description
+------------+-------------------+----------------------------------------------------------+----------+--------------+-------------
+ id         | integer           | not null default nextval('system_user_id_seq'::regclass) | plain    |              |
+ email      | citext            | not null                                                 | extended |              |
+ password   | character varying | not null                                                 | extended |              |
+ first_name | character varying | not null                                                 | extended |              |
+ last_name  | character varying | not null                                                 | extended |              |
+Indexes:
+    "system_user_pkey" PRIMARY KEY, btree (id)
+    "system_user_email_key" UNIQUE CONSTRAINT, btree (email)
+Referenced by:
+    TABLE "ticket" CONSTRAINT "fk_assignee_ticket_system_user" FOREIGN KEY (assignee) REFERENCES system_user(id)
+    TABLE "ticket" CONSTRAINT "fk_author_ticket_system_user" FOREIGN KEY (author) REFERENCES system_user(id)
