@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'ticketingsystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ticketing-system-db',
+        'NAME': 'ticketing_system_db',
         'USER': 'postgres',
         'PASSWORD': 'admin',
         'HOST': '',
