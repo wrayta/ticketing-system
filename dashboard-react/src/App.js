@@ -1,21 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React-Django</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+	state = {
+		tickets: []
+	};
+
+	async componentDidMount() {
+        try {
+            const res = await fetch('http://127.0.0.1:8000/dashboard/tickets/');
+            const tickets = await res.json();
+            this.setState({
+                tickets
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    render() {
+        return (
+            <div className="Ticket-container">
+                {this.state.tickets.map(ticket => (
+                	<div key={ticket.id}>
+	                	<h1>{ticket.title}</h1>
+	                	<p>Author: {ticket.author}</p>
+	                	<p>Description: {ticket.description}</p>
+	                	<p>Assignee: {ticket.assignee}</p>
+	                </div>
+                ))}
+            </div>
+        );
+    }
 }
 
 export default App;
