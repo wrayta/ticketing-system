@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
-class System_user(models.Model):
+class SystemUser(models.Model):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
@@ -19,5 +19,5 @@ class Ticket(models.Model):
     status = models.CharField(max_length=20, default='OPEN')
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(System_user, null=True, on_delete=models.SET_NULL, related_name='%(class)s_fk_author_ticket_system_user')
-    assignee = models.ForeignKey(System_user, null=True, on_delete=models.SET_NULL, related_name='%(class)s_fk_assignee_ticket_system_user')
+    author = models.ForeignKey(SystemUser, null=True, on_delete=models.SET_NULL, related_name='%(class)s_fk_author_ticket_system_user')
+    assignee = models.ForeignKey(SystemUser, null=True, on_delete=models.SET_NULL, related_name='%(class)s_fk_assignee_ticket_system_user')

@@ -23,9 +23,9 @@ class App extends Component {
                 {this.state.tickets.map(ticket => (
                 	<div key={ticket.id}>
 	                	<h1>{ticket.title}</h1>
-	                	<p>Author: {ticket.author}</p>
+	                	<p>Author: {ticket.author.name}</p>
 	                	<p>Description: {ticket.description}</p>
-	                	<p>Assignee: {ticket.assignee}</p>
+	                	<p>Assignee: {ticket.assignee.email}</p>
 	                </div>
                 ))}
             </div>

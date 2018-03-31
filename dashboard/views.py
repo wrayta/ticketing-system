@@ -3,6 +3,7 @@ from itertools import chain
 
 from . import models
 from . import serializers
+from django.core.serializers import serialize
 
 #
 # def index(request):
@@ -17,9 +18,9 @@ class DetailTicket(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.TicketSerializer
 
 class ListUser(generics.ListCreateAPIView):
-    queryset = models.System_user.objects.all()
+    queryset = models.SystemUser.objects.all()
     serializer_class = serializers.SystemUserSerializer
 
 class DetailUser(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.System_user.objects.all()
+    queryset = models.SystemUser.objects.all()
     serializer_class = serializers.SystemUserSerializer
