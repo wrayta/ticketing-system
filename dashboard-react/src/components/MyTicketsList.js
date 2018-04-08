@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editTicket, fetchTickets } from '../actions/index';
-import { getMyTickets } from '../reducers/tickets-reducer';
+import { getMyTickets } from '../reducers/my-tickets-reducer';
 import * as actions from '../actions/index'
 
 class MyTicketsList extends Component {
@@ -11,7 +11,7 @@ class MyTicketsList extends Component {
     // };
 
     async componentDidMount() {
-        console.log("COMPONENT DID MOUNT");
+        console.log('COMPONENT DID MOUNT');
         this.fetchMyTickets();     
     }
 
@@ -29,6 +29,12 @@ class MyTicketsList extends Component {
         // }
     }
 
+    handleTicketClick(id) {
+        const { editTicket, toggleShowing } = this.props;
+        toggleShowing();
+        editTicket(id);        
+    }
+
     render() {
         const { tickets } = this.props;
         return (
@@ -36,7 +42,7 @@ class MyTicketsList extends Component {
                 <h1>My Tickets</h1>
                 <table>
                     {tickets.map(ticket => (
-                        <div id={"list-ticket-" + ticket.id} key={ticket.id} onClick={() => this.props.onTicketClick(ticket.id)}>
+                        <div id={"list-ticket-" + ticket.id} key={ticket.id} onClick={() => this.handleTicketClick(ticket.id)}>
                             <tr>
                                 <td>Title: {ticket.title}</td>
                             </tr>

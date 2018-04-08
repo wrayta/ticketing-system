@@ -10,3 +10,7 @@ export const connectToDatabase = () => {
 };
 
 export const fetchTickets = (connection) => { return connection.json(); };
+
+// export const editTicket = (connection) => {
+	
+// };

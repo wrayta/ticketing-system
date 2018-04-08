@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import ticketsReducer from './reducers/tickets-reducer';
+import rootReducer from './reducers/index';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
@@ -12,7 +12,7 @@ const configureStore = () => {
 	}
 
 	return createStore(
-		ticketsReducer,
+		rootReducer,
 		applyMiddleware(...middlewares)
 	);
 	
