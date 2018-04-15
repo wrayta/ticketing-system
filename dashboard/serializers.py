@@ -14,7 +14,7 @@ class SystemUserSerializer(serializers.ModelSerializer):
 
 class SystemUserField(serializers.RelatedField):
     def to_representation(self, value):
-        return {'email': value.email, 'name': value.first_name + ' ' + value.last_name,}
+        return {'id': value.id, 'email': value.email, 'name': value.first_name + ' ' + value.last_name,}
 
 class TicketSerializer(serializers.ModelSerializer):
     # author = SystemUserSerializer(many=False, read_only=True)

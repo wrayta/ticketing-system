@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { editTicket, fetchTickets } from '../actions/index';
+// import { fetchTickets } from '../actions/index';
 import { getMyTickets } from '../reducers/my-tickets-reducer';
 import * as actions from '../actions/index'
 
 class MyTicketsList extends Component {
 
-    // state = {
-    // 	tickets: []
-    // };
-
-    async componentDidMount() {
-        console.log('COMPONENT DID MOUNT');
-        this.fetchMyTickets();     
-    }
-
-    async fetchMyTickets() {
+    componentDidMount() {
         const { fetchTickets } = this.props;
-        fetchTickets();
-        // try {
-        //     const connection = await fetch('http://127.0.0.1:8000/dashboard/tickets/');
-        //     const tickets = await connection.json();
-        //      // this.setState({
-        //      //     tickets
-        //      // });
-        // } catch (e) {
-        //     console.log(e);
-        // }
+        console.log('COMPONENT DID MOUNT');
+        fetchTickets();     
     }
+
+    // async fetchMyTickets() {
+        
+    //     fetchTickets();
+    //     // try {
+    //     //     const connection = await fetch('http://127.0.0.1:8000/dashboard/tickets/');
+    //     //     const tickets = await connection.json();
+    //     //      // this.setState({
+    //     //      //     tickets
+    //     //      // });
+    //     // } catch (e) {
+    //     //     console.log(e);
+    //     // }
+    // }
 
     handleTicketClick(id) {
         const { editTicket, toggleShowing } = this.props;
