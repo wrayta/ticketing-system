@@ -3,6 +3,20 @@ const myTickets = (state = [], action) => {
 		case 'FETCH_MY_TICKETS':
 			console.log('MY TICKETS ARE FETCHED');
 			return action.myTickets;
+		case 'FETCH_MY_EDITED_TICKETS':
+			console.log('MY EDITED TICKETS ARE FETCHED');
+			return state.map( (ticket) => {
+				if(ticket.id !== action.editedTicket.id) {
+					return ticket;
+				}
+
+				return {	
+					...action.editedTicket,
+					assignee: {
+						...action.editedTicket.assignee,
+					},	
+				};
+			});
 		default:
 			return state;
 	}

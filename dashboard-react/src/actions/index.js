@@ -51,6 +51,15 @@ export const updateTicket = (values) => (dispatch, getState) => {
 	api.updateTicket(values).then(response => {
 		console.log(response);
 		console.log(response.data);
+		dispatch({
+			type: 'TOGGLE_SHOWING',
+			isShowing: false
+		});
+
+		dispatch({
+			type: 'FETCH_MY_EDITED_TICKETS',
+			editedTicket: values
+		});
 	})
 	.catch(error => {
 		console.log(error);
