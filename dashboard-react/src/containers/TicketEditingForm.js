@@ -8,7 +8,7 @@ import ObjectSelect from './ObjectSelect';
 
 let TicketEditingForm = props => {
 
-	const { ticket, users, handleSubmit } = props;
+	const { ticket, users, handleSubmit, handleEditCancel } = props;
 
 	let assigneeFields = [];
 
@@ -17,7 +17,7 @@ let TicketEditingForm = props => {
 		console.log("User email: " + user.email);
 		console.log("User name: " + user.first_name + ' ' + user.last_name);
 		assigneeFields.push(
-			{ id: user.id, email: user.email, first_name: user.first_name, last_name: user.last_name }
+			{ id: user.id, email: user.email, name: user.first_name + ' ' + user.last_name }
 		)}
 	);
 
@@ -69,7 +69,7 @@ let TicketEditingForm = props => {
 			</div>
 
 			<button type="button">Delete</button>
-			<button type="button">Cancel</button>
+			<button type="button" onClick={handleEditCancel}>Cancel</button>
 			<button type="submit">Save</button>
 		</form>
 	);
@@ -84,7 +84,7 @@ const mapStateToTicketEditingFormProps = (state) => {
 
 TicketEditingForm = connect(
 	mapStateToTicketEditingFormProps,
-	null
+	actions
 )(TicketEditingForm);
 
 TicketEditingForm = reduxForm({

@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TicketEditingForm from './TicketEditingForm';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
 
-class TicketEditingContainer extends Component {
-
-	render() {
-		const { updateTicket } = this.props;
-		return (
-			<TicketEditingForm onSubmit={updateTicket} />
-		);
-	}
+let TicketEditingContainer = props => {
+	const { updateTicket } = props;
+	return (
+		<TicketEditingForm onSubmit={updateTicket} />
+	);
 };
 
 // const mapStateToTicketEditingPageProps = (state) => {

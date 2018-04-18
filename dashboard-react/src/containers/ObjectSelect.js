@@ -14,7 +14,7 @@ class ObjectSelect extends Component {
         onChange={event => input.onChange(parse(event))}
         {...rest}>
         {options.map(option =>
-          <option key={option.id} value={JSON.stringify(option)} selected={input.value.id == option.id}>{option.first_name} {option.last_name}</option>)}
+          <option key={option.id} value={JSON.stringify(option)} selected={input.value.id == option.id}>{option.name}</option>)}
       </select>
     );
   }

@@ -2,7 +2,10 @@ const ticketEditingContainer = (state = false, action) => {
 	switch (action.type) {
 		case 'TOGGLE_SHOWING':
 			console.log('TOGGLE_SHOWING');
-			return action.isShowing;
+			return {
+				...state,
+				isShowing: !state.isShowing
+			};
 		default:
 			return state;
 	}
@@ -13,6 +16,6 @@ const ticketEditingContainer = (state = false, action) => {
 
 };
 
-export const getIsShowing = (state) => state.ticketEditingContainer;
+export const getIsShowing = (state) => state.ticketEditingContainer.isShowing;
 
 export default ticketEditingContainer;
