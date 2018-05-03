@@ -8,9 +8,14 @@
         <title>Django + React CRUD</title>
     </head>
     <body>
-        <div id="root">
-         This is where React will be mounted
-        </div>
+        <div id="root"></div>
         {% render_bundle 'main' %}
     </body>
 </html>
+
+<!-- {% block main %}
+<div id="{{component_name}}"></div>
+{% render_bundle 'main' %}
+{% render_bundle component_name}
+{% endblock %} -->
+         

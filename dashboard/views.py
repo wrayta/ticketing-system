@@ -1,13 +1,11 @@
 from rest_framework import generics
-from itertools import chain
+# from django.shortcuts import render
 
 from . import models
 from . import serializers
-from django.core.serializers import serialize
 
-#
 # def index(request):
-#     return HttpResponse("Hello, world. You're at the dashboard index.")
+#     return render(request, 'index.html')
 
 class ListTicket(generics.ListCreateAPIView):
     queryset = models.Ticket.objects.all()

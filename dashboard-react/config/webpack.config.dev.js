@@ -86,7 +86,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -117,7 +117,7 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -146,7 +146,7 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.
@@ -265,3 +265,51 @@ module.exports = {
     hints: false,
   },
 };
+
+//const config = {
+//    context: __dirname,
+//    entry:  {
+//        index: 'index.js',
+//    },
+//    output: {
+//        path: path.resolve(__dirname, 'dist'),
+//        filename: '[name].bundle.js',
+//        chunkFilename: '[name].bundle.js'
+//    },
+//    module: {
+//        rules: [
+//            {
+//                test: /\.js$/,
+//                exclude: /node_modules/,
+//                use: {
+//                    loader: 'babel-loader',
+//                    options: {
+//                        presets: ['env']
+//                    }
+//                }
+//            },
+//            {
+//                test: /\.css$/,
+//                use: ExtractTextPlugin.extract({
+//                    fallback: "style-loader",
+//                    use: "css-loader"
+//                })
+//            },
+//        ]
+//    },
+//    plugins: [
+//        new webpack.optimize.CommonsChunkPlugin({
+//            names: ['manifest']
+//        }),
+//        new BundleTracker({filename: './webpack-stats.dev.json'}),
+//        new ExtractTextPlugin('style.css')
+//        new HtmlWebpackPlugin({
+//            template: 'static/js/index.html'
+//        }),
+//    ],
+//    resolve: {
+//        modules: ['./static/assets/', './static/assets/javascript/', './static/assets/css/', 'node_modules']
+//    }
+//};
+//
+//module.exports = config;

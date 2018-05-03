@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { fetchTickets } from '../actions/index';
 import { getMyTickets } from '../reducers/my-tickets-reducer';
+// import { getIsShowing } from '../reducers/ticket-editing-container-reducer';
 import * as actions from '../actions/index'
+import { withRouter } from 'react-router-dom';
 
 class MyTicketsList extends Component {
 
     componentDidMount() {
-        const { fetchTickets } = this.props;
+        const { fetchTickets, fetchUsers } = this.props;
         console.log('COMPONENT DID MOUNT');
-        fetchTickets();     
+        fetchTickets();
+        fetchUsers();     
     }
 
     // async fetchMyTickets() {
@@ -27,9 +30,17 @@ class MyTicketsList extends Component {
     // }
 
     handleTicketClick(id) {
-        const { editTicket, toggleShowing } = this.props;
-        toggleShowing();
-        editTicket(id);        
+        const { editTicket, history } = this.props;
+        // toggleShowing();
+        editTicket(id);
+
+        // if(!isShowing) {
+        history.push(`/dashboard/edit-ticket/${id}`);
+        // } else {
+        //     history.push('/dashboard/');
+        // }
+
+        // <Link to={`/dashboard/edit-ticket-${ticket.id}`}>Edit</Link>       
     }
 
     render() {
@@ -62,7 +73,8 @@ class MyTicketsList extends Component {
 
 const mapStateToMyTicketsListProps = (state) => {
     return {
-        tickets: getMyTickets(state)
+        tickets: getMyTickets(state),
+        // isShowing: getIsShowing(state)
     }
 };
 
@@ -78,5 +90,7 @@ MyTicketsList = connect(
     mapStateToMyTicketsListProps,
     actions,
 )(MyTicketsList);
+
+MyTicketsList = withRouter(MyTicketsList);
 
 export default MyTicketsList;

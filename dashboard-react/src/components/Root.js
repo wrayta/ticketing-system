@@ -1,12 +1,20 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import DashboardApp from './DashboardApp';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
+import DashboardHome from './DashboardHome';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import CreateTicket from '../containers/CreateTicketContainer';
 
 const Root = ({ store }) => (
 	<Provider store={store}>
-		<DashboardApp />
+		<Router>
+			<Switch>
+				<Route path='/dashboard' 
+					component={DashboardHome} />
+				<Route exact path='/create-ticket'
+	                component={CreateTicket} />
+            </Switch>
+		</Router>
 	</Provider>
 );
 
