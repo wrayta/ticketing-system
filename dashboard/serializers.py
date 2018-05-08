@@ -22,7 +22,7 @@ class SystemUserField(serializers.RelatedField):
         # last_name = name_array[1]
         # print (value)
         # return {'id': value['id'], 'email': value['email'], 'password': value['password'], 'first_name': first_name, 'last_name': last_name,}
-        return models.SystemUser.objects.get(id=value['id'])
+        return models.SystemUser.objects.get(id=value)
 
 class TicketSerializer(serializers.ModelSerializer):
     # author = SystemUserSerializer(many=False, read_only=True)

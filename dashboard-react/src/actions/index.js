@@ -109,10 +109,10 @@ export const createTicket = (values) => (dispatch) => {
 		// 	console.log("MY_TICKETS: ");
 		// 	console.log(myTickets.data);
 
-		// 	dispatch({
-		// 		type: 'FETCH_MY_TICKETS',
-		// 		myTickets: myTickets.data,
-		// 	});
+		dispatch({
+			type: 'FETCH_MY_ADDED_TICKETS',
+			createdTicket: response.data,
+		});
 		// })
 		// .catch(error => {
 		// 	console.log(error);

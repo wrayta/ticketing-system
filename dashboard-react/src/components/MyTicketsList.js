@@ -8,12 +8,12 @@ import { withRouter } from 'react-router-dom';
 
 class MyTicketsList extends Component {
 
-    componentDidMount() {
-        const { fetchTickets, fetchUsers } = this.props;
-        console.log('COMPONENT DID MOUNT');
-        fetchTickets();
-        fetchUsers();     
-    }
+    // componentDidMount() {
+    //     const { fetchTickets, fetchUsers } = this.props;
+    //     console.log('COMPONENT DID MOUNT');
+    //     fetchTickets();
+    //     fetchUsers();     
+    // }
 
     // async fetchMyTickets() {
         
@@ -63,6 +63,7 @@ class MyTicketsList extends Component {
                             <tr>
                                 <td>Assignee: {ticket.assignee.email}</td>
                             </tr>
+                            <tr><br/></tr>
                         </div>
                     ))}
                 </table>

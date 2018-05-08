@@ -1,25 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import DashboardHome from './DashboardHome';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CreateTicket from '../containers/CreateTicketContainer';
+import { connect } from 'react-redux';
+import * as actions from '../actions/index'
 
-const Root = ({ store }) => (
-	<Provider store={store}>
-		<Router>
-			<Switch>
-				<Route path='/dashboard' 
-					component={DashboardHome} />
-				<Route exact path='/create-ticket'
-	                component={CreateTicket} />
-            </Switch>
-		</Router>
-	</Provider>
-);
+class Root extends Component {
+
+	componentDidMount() {
+        const { fetchTickets, fetchUsers } = this.props;
+        console.log('COMPONENT DID MOUNT');
+        fetchTickets();
+        fetchUsers();     
+    }
+
+	render() {
+		const { store } = this.props;
+		return(
+			<Provider store={store}>
+				<Router>
+					<Switch>
+						<Route path='/dashboard' 
+							component={DashboardHome} />
+						<Route exact path='/create-ticket'
+			                component={CreateTicket} />
+		            </Switch>
+				</Router>
+			</Provider>
+		);
+	}
+}
 
 Root.propTypes = {
 	store: PropTypes.object.isRequired,
 };
+
+Root = connect(
+	null,
+	actions,
+)(Root);
 
 export default Root;

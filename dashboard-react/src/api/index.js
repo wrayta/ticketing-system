@@ -21,40 +21,18 @@ export const createTicket = (values) => {
 	const data = {
 		title: values.title,
 		description: values.description,
-		author: values.assignee,
-		assignee: values.assignee,
+		author: values.assignee.id,
+		assignee: values.assignee.id,
 	};
 
-	return axios({	
-		method: 'post',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		url: `${ROOT_URL}/dashboard/tickets/`,
-		data: data,
-	});
+	return axios.post(`${ROOT_URL}/dashboard/tickets/`, data);
 
-	// console.log('CREATE TICKET VALUES IN API:');
-	// console.log(values.assignee.id);
-	// console.log(values.assignee.email);
-	// console.log(values.assignee.name);
-
-	// const stringified_user = qs.stringify({
-	// 	email: values.assignee.email,
-	// 	id: values.assignee.id,
-	// 	name: values.assignee.name,
-	// });
-
-	// return axios.post(`${ROOT_URL}/dashboard/tickets/`, {
-	// 	title: values.title,
-	// 	description: values.description,
-	// 	assignee: stringified_user,
-	// 	author: stringified_user,
+	// ({	
+	// 	method: 'post',
+	// 	headers: {
+	// 		'Content-Type': 'application/json',
+	// 	},
+	// 	url: `${ROOT_URL}/dashboard/tickets/`,
+	// 	data: data,
 	// });
 };
-
-// export const fetchTickets = (connection) => { return connection.json(); };
-
-// export const editTicket = (connection) => {
-
-// };

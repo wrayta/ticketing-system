@@ -17,11 +17,11 @@ const myTickets = (state = [], action) => {
 					},	
 				};
 			});
-		// case 'FETCH_MY_ADDED_TICKETS':
-		// 	return [
-		// 		...state, 
-		// 		action.createdTicket
-		// 	];
+		case 'FETCH_MY_ADDED_TICKETS':
+			return [
+				...state, 
+				action.createdTicket
+			];
 		default:
 			return state;
 	}
