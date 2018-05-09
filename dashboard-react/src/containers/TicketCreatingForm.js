@@ -9,18 +9,19 @@ let TicketCreatingForm = props => {
 
 	const { users, handleSubmit, handleCancel } = props;
 
-	let assigneeFields = [];
+	// let assigneeFields = [];
 
-	users.map( (user) => {
-		console.log("User id: " + user.id);
-		console.log("User email: " + user.email);
-		console.log("User name: " + user.first_name + ' ' + user.last_name);
-		assigneeFields.push(
-			{ id: user.id, email: user.email, name: user.first_name + ' ' + user.last_name }
-		)}
-	);
+	// users.map( (user) => {
+		// console.log("User id: " + user.id);
+		// console.log("User email: " + user.email);
+		// console.log("User name: " + user.first_name + ' ' + user.last_name);
+		// assigneeFields.push(
+		// 	users
+		// );
+	// }
+	// );
 
-	console.log(assigneeFields[0]);
+	// console.log(assigneeFields[0]);
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -36,7 +37,7 @@ let TicketCreatingForm = props => {
 
 			<div>
 				<label>Assignee:</label>
-				<Field name="assignee" component={ObjectSelect} options={assigneeFields} /><br/>
+				<Field name="assignee" component={ObjectSelect} options={users} /><br/>
 			</div>
 
 			<button type="button" onClick={handleCancel}>Cancel</button>

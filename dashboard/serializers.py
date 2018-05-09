@@ -2,19 +2,23 @@ from rest_framework import serializers
 from . import models
 
 class SystemUserSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
+
     class Meta:
         fields = (
             'id',
             'email',
-            'password',
-            'first_name',
-            'last_name',
+            # 'password',
+            'full_name',
         )
         model = models.SystemUser
 
+    def get_full_name(self, obj):
+        return '{} {}'.format(obj.first_name, obj.last_name)
+
 class SystemUserField(serializers.RelatedField):
     def to_representation(self, value):
-        return {'id': value.id, 'email': value.email, 'password': value.password, 'name': value.first_name + ' ' + value.last_name,}
+        return {'id': value.id, 'email': value.email, 'name': value.first_name + ' ' + value.last_name,}
 
     def to_internal_value(self, value):
         # name_array = [word.strip() for word in value['name'].split(' ')]
