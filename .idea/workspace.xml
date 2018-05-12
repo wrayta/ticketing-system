@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="46832201-417b-4d2b-ade3-8500485fac77" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dashboard-react/src/containers/CreateTicketContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dashboard-react/src/containers/ObjectSelect.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dashboard-react/src/containers/TicketCreatingForm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dashboard-react/src/containers/TicketEditingContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dashboard-react/src/containers/TicketEditingForm.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/actions/index.js" afterPath="$PROJECT_DIR$/dashboard-react/src/actions/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/api/index.js" afterPath="$PROJECT_DIR$/dashboard-react/src/api/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/components/DashboardHome.js" afterPath="$PROJECT_DIR$/dashboard-react/src/components/DashboardHome.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/components/Root.js" afterPath="$PROJECT_DIR$/dashboard-react/src/components/Root.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/models.py" afterPath="$PROJECT_DIR$/dashboard/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/serializers.py" afterPath="$PROJECT_DIR$/dashboard/serializers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack-stats.dev.json" afterPath="$PROJECT_DIR$/webpack-stats.dev.json" />
-    </list>
+    <list default="true" id="46832201-417b-4d2b-ade3-8500485fac77" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

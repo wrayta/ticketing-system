@@ -2,9 +2,9 @@ const editTicket = (state = null, action) => {
 	switch(action.type) {
 		case 'EDIT_TICKET':
 			console.log('TICKET TO EDIT');
-			// console.log(action.tickets[action.id - 1]);
-			console.log(action.tickets.find(ticket => ticket.id === action.id));
-			return action.tickets.find(ticket => ticket.id === action.id);
+			// console.log(action.tickets.find(ticket => ticket.id === action.id));
+			// return action.tickets.find(ticket => ticket.id === action.id);
+			return action.ticket;
 		case 'UPDATE_TICKET':
 			console.log('TICKET TO UPDATE');
 			return state;

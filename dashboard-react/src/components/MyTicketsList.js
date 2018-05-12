@@ -32,10 +32,12 @@ class MyTicketsList extends Component {
     handleTicketClick(id) {
         const { editTicket, history } = this.props;
         // toggleShowing();
-        editTicket(id);
+        editTicket(id).then( () => {
+                history.push(`/dashboard/edit-ticket/${id}`);
+            }
+        );
 
         // if(!isShowing) {
-        history.push(`/dashboard/edit-ticket/${id}`);
         // } else {
         //     history.push('/dashboard/');
         // }

@@ -8,6 +8,10 @@ export const fetchTickets = () => {
 	return axios.get(`${ROOT_URL}/dashboard/tickets/`);
 };
 
+export const fetchTicket = (id) => {
+	return axios.get(`${ROOT_URL}/dashboard/tickets/${id}/`);
+};
+
 export const fetchUsers = () => {
 	return axios.get(`${ROOT_URL}/dashboard/users/`);
 };
