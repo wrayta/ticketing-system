@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import DashboardHome from './DashboardHome';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import CreateTicket from '../containers/CreateTicketContainer';
+import CreateTicketPage from '../components/CreateTicketPage';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index'
 
@@ -25,7 +25,7 @@ class Root extends Component {
 						<Route path='/dashboard' 
 							component={DashboardHome} />
 						<Route exact path='/create-ticket'
-			                component={CreateTicket} />
+			                component={CreateTicketPage} />
 		            </Switch>
 				</Router>
 			</Provider>

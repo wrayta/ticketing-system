@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MyTicketsList from './MyTicketsList';
-import TicketEditingContainer from '../containers/TicketEditingContainer';
+import TicketEditingPage from '../components/TicketEditingPage';
 import { Route, Link, Switch } from 'react-router-dom';
 
 const DashboardHome = props => {
@@ -21,7 +21,7 @@ const DashboardHome = props => {
                 </td>
                 <td>
                     <Route exact path='/dashboard/edit-ticket/:id'
-                    component={TicketEditingContainer} /> 
+                    component={TicketEditingPage} /> 
                 </td>                             
             </tr>
         </table>

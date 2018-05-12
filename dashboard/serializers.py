@@ -2,18 +2,20 @@ from rest_framework import serializers
 from . import models
 
 class SystemUserSerializer(serializers.ModelSerializer):
-    full_name = serializers.SerializerMethodField()
+    name = serializers.SerializerMethodField()
 
     class Meta:
         fields = (
             'id',
             'email',
             # 'password',
-            'full_name',
+            # 'first_name',
+            # 'last_name',
+            'name',
         )
         model = models.SystemUser
 
-    def get_full_name(self, obj):
+    def get_name(self, obj):
         return '{} {}'.format(obj.first_name, obj.last_name)
 
 class SystemUserField(serializers.RelatedField):

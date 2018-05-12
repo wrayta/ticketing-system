@@ -4,7 +4,7 @@ import * as actions from '../actions/index';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-class CreateTicketContainer extends Component {
+class CreateTicketPage extends Component {
 
 	handleCreate = (values) => {
 		const { createTicket, history } = this.props;
@@ -32,11 +32,11 @@ class CreateTicketContainer extends Component {
 	}
 };
 
-CreateTicketContainer = connect(
+CreateTicketPage = connect(
 	null,
 	actions
-)(CreateTicketContainer);
+)(CreateTicketPage);
 
-CreateTicketContainer = withRouter(CreateTicketContainer);
+CreateTicketPage = withRouter(CreateTicketPage);
 
-export default CreateTicketContainer;
+export default CreateTicketPage;

@@ -64,9 +64,9 @@ export const editTicket = (id) => (dispatch, getState) => {
 export const updateTicket = (values) => (dispatch, getState) => {
 	console.log(values);
 
-	console.log('timestamp: ' + moment().format());
+	// console.log('timestamp: ' + moment().format());
 
-	values.modified_date = moment().format();
+	// values.modified_date = moment().format();
 
 	api.updateTicket(values).then(response => {
 		console.log(response);

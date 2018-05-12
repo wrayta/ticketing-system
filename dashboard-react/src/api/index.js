@@ -13,7 +13,16 @@ export const fetchUsers = () => {
 };
 
 export const updateTicket = (values) => {
-	return axios.put(`${ROOT_URL}/dashboard/tickets/${values.id}/`, values);
+	
+	const data = {
+		title: values.title,
+		description: values.description,
+		status: values.status,
+		author: values.author.id,
+		assignee: values.assignee.id,
+	};
+
+	return axios.put(`${ROOT_URL}/dashboard/tickets/${values.id}/`, data);
 };
 
 export const createTicket = (values) => {
