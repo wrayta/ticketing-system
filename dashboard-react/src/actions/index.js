@@ -83,3 +83,11 @@ export const createTicket = (values) => (dispatch) => {
 		console.log(error);
 	});
 };
+
+export const loginUser = (values) => (dispatch) => {
+	console.log("LOGIN_USER");
+};
+
+export const createUser = (values) => (dispatch) => {
+	console.log("CREATE_USER");
+};

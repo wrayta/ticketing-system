@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getUsers } from '../reducers/users-reducer';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';

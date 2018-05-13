@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import DashboardHome from './DashboardHome';
+import DashboardPage from './DashboardPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CreateTicketPage from '../components/CreateTicketPage';
 import { connect } from 'react-redux';
+import LoginRegister from '../components/LoginRegisterPage';
+import SignUpPage from '../components/SignUpPage';
 import * as actions from '../actions/index'
 
 class Root extends Component {
@@ -22,8 +24,12 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router>
 					<Switch>
+						<Route exact path='/'
+							component={LoginRegister} />
+						<Route exact path='/sign-up'
+							component={SignUpPage} />
 						<Route path='/dashboard' 
-							component={DashboardHome} />
+							component={DashboardPage} />
 						<Route exact path='/create-ticket'
 			                component={CreateTicketPage} />
 		            </Switch>

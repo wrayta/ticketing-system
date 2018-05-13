@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import MyTicketsList from './MyTicketsList';
 import TicketEditingPage from '../components/TicketEditingPage';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
-const DashboardHome = props => {
+const DashboardPage = props => {
     return (
         <table>
             <tr>
@@ -28,4 +28,4 @@ const DashboardHome = props => {
     );
 }
 
-export default DashboardHome;
+export default DashboardPage;
