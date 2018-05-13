@@ -29,6 +29,13 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+CORS_ORIGIN_WHITELIST = (
+
+    'localhost:3000',
+    '127.0.0.1:3000'
+)
+
+
 INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'django.contrib.admin',
@@ -54,9 +61,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'localhost:8000/'
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:8000/'
+# )
 
 ROOT_URLCONF = 'ticketingsystem.urls'
 
