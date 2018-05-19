@@ -23,6 +23,11 @@ let UserRegisterForm = props => {
 			</div>
 
 			<div>
+				<label>Username:</label>
+				<Field name="username" component="input" type="text" /><br/>
+			</div>
+
+			<div>
 				<label>Password:</label>
 				<Field name="password" component="input" type="text" /><br/>
 			</div>

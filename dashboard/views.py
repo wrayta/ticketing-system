@@ -3,6 +3,7 @@ from rest_framework import generics
 
 from . import models
 from . import serializers
+from django.contrib.auth.models import User
 
 # def index(request):
 #     return render(request, 'index.html')
@@ -16,9 +17,9 @@ class DetailTicket(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.TicketSerializer
 
 class ListUser(generics.ListCreateAPIView):
-    queryset = models.SystemUser.objects.all()
-    serializer_class = serializers.SystemUserSerializer
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
 
 class DetailUser(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.SystemUser.objects.all()
-    serializer_class = serializers.SystemUserSerializer
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
