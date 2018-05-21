@@ -5,7 +5,7 @@ import qs from 'qs';
 const API_URL = 'http://127.0.0.1:8000/api';
 const ROOT_URL = 'http://127.0.0.1:3000';
 
-export const fetchTickets = () => {
+export const fetchMyTickets = () => {
 	return axios.get(`${API_URL}/tickets/`);
 };
 
@@ -20,9 +20,7 @@ export const fetchUsers = () => {
 export const updateTicket = (values) => {
 	
 	const data = {
-		title: values.title,
-		description: values.description,
-		status: values.status,
+		...values,
 		author: values.author.id,
 		assignee: values.assignee.id,
 	};
@@ -33,20 +31,15 @@ export const updateTicket = (values) => {
 export const createTicket = (values) => {
 	
 	const data = {
-		title: values.title,
-		description: values.description,
+		...values,
 		author: values.assignee.id,
 		assignee: values.assignee.id,
 	};
 
 	return axios.post(`${API_URL}/tickets/`, data);
+};
 
-	// ({	
-	// 	method: 'post',
-	// 	headers: {
-	// 		'Content-Type': 'application/json',
-	// 	},
-	// 	url: `${ROOT_URL}/dashboard/tickets/`,
-	// 	data: data,
-	// });
+export const createUser = (values) => {
+
+	axios.post(`${API_URL}/users/`, {...values, is_active: false});
 };

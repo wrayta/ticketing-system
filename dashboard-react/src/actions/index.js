@@ -1,8 +1,8 @@
 import * as api from '../api';
 
-export const fetchTickets = () => (dispatch) => {
+export const fetchMyTickets = () => (dispatch) => {
 
-	return api.fetchTickets().then(myTickets => {
+	return api.fetchMyTickets().then(myTickets => {
 		console.log("MY_TICKETS: ");
 		console.log(myTickets.data);
 
@@ -46,7 +46,7 @@ export const editTicket = (id) => (dispatch) => {
 
 };
 
-export const updateTicket = (values) => (dispatch, getState) => {
+export const updateTicket = (values) => (dispatch) => {
 	console.log(values);
 
 	api.updateTicket(values).then(response => {
@@ -90,4 +90,5 @@ export const loginUser = (values) => (dispatch) => {
 
 export const createUser = (values) => (dispatch) => {
 	console.log("CREATE_USER");
+	api.createUser(values);
 };

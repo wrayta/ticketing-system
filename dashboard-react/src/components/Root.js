@@ -12,10 +12,11 @@ import * as actions from '../actions/index'
 class Root extends Component {
 
 	componentDidMount() {
-        const { fetchTickets, fetchUsers } = this.props;
+        const { fetchUsers, fetchMyTickets } = this.props;
         console.log('COMPONENT DID MOUNT');
-        fetchTickets();
+        // fetchTickets();
         fetchUsers();     
+        fetchMyTickets();
     }
 
 	render() {
