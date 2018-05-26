@@ -43,3 +43,7 @@ export const createUser = (values) => {
 
 	axios.post(`${API_URL}/users/`, {...values, is_active: false});
 };
+
+export const loginUser = (values) => {
+	axios.post(`${API_URL}/login/`, values);
+};

@@ -14,7 +14,7 @@ let UserLoginForm = props => {
 
 			<div>
 				<label>Password:</label>
-				<Field name="password" component="input" type="text" /><br/>
+				<Field name="password" component="input" type="password" /><br/>
 			</div>
 
 			<button type="submit">Login</button>

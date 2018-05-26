@@ -86,6 +86,7 @@ export const createTicket = (values) => (dispatch) => {
 
 export const loginUser = (values) => (dispatch) => {
 	console.log("LOGIN_USER");
+	api.loginUser(values);
 };
 
 export const createUser = (values) => (dispatch) => {

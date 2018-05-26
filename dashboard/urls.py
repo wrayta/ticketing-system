@@ -10,4 +10,5 @@ urlpatterns = [
     path('tickets/<int:pk>/', views.DetailTicket.as_view()),
     path('users/', views.ListUser.as_view()),
     path('users/<int:pk>/', views.DetailUser.as_view()),
+    path('login/', views.login_user),
 ]
