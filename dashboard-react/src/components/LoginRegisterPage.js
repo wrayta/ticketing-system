@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import UserLoginForm from './UserLoginForm';
 import * as actions from '../actions/index';
+import { getAuthentication } from '../reducers/authentication-reducer';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, Link, Redirect } from 'react-router-dom';
 
 class LoginRegisterPage extends Component {
 
 	login = (values) => {
-		const { loginUser, history } = this.props;
+		const { login, history } = this.props;
 
-		loginUser(values);
+		login(values);
 
-		history.push('/dashboard/');
+		// history.push('/dashboard/');
 	}
 
 	render() {
+
+		const { isAuthenticated }  = this.props;
+		if (isAuthenticated) {
+			return <Redirect to='/dashboard/' />
+		}
 		
 		return (
 			<div>
@@ -39,8 +45,14 @@ class LoginRegisterPage extends Component {
 	}
 }
 
+const mapStateToLoginRegisterPageProps = (state) => {
+	return {
+		isAuthenticated: getAuthentication(state).isAuthenticated,
+	}
+};
+
 LoginRegisterPage = connect(
-	null,
+	mapStateToLoginRegisterPageProps,
 	actions
 )(LoginRegisterPage);
 

@@ -20,5 +20,5 @@ class Ticket(models.Model):
     status = models.CharField(max_length=20, default='OPEN')
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='%(class)s_fk_author_ticket_user')
-    assignee = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='%(class)s_fk_assignee_ticket_user')
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='author_tickets')
+    assignee = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='assignee_tickets')

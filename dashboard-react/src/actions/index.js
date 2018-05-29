@@ -1,19 +1,40 @@
 import * as api from '../api';
 
-export const fetchMyTickets = () => (dispatch) => {
+export const fetchMyTickets = () => (dispatch, getState) => {
 
-	return api.fetchMyTickets().then(myTickets => {
+	let headers = {"Content-Type": "application/json"};
+
+	let {token} = getState().authentication;
+
+	if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+	return api.fetchMyTickets(headers).then(response => {
 		console.log("MY_TICKETS: ");
-		console.log(myTickets.data);
+		console.log(response.data);
 
-		dispatch({
-			type: 'FETCH_MY_TICKETS',
-			myTickets: myTickets.data,
-		});
+		if (response.status === 200) {
+          return dispatch({
+				type: 'FETCH_MY_TICKETS',
+				myTickets: response.data,
+			});
+        }
+		
 	})
-	.catch(error => {
-		console.log(error);
-	});      
+	.catch (error => {
+		if(error.response) {
+  			console.log(error.response.data);
+	        console.log(error.response.status);
+	        console.log(error.response.headers);
+
+      		dispatch({
+      			type: "AUTHENTICATION_ERROR", 
+      			data: error.response.data
+      		});
+		}
+   
+    })         
 };
 
 export const fetchUsers = () => (dispatch) => {
@@ -31,65 +52,253 @@ export const fetchUsers = () => (dispatch) => {
 	});
 };
 
-export const editTicket = (id) => (dispatch) => {
+export const editTicket = (id) => (dispatch, getState) => {
 
 	// TODO: Make API call and query DB for ticket to edit (since modified_date is set in django back-end)
-	return api.fetchTicket(id).then(ticket => {
-		dispatch({
-			type: 'EDIT_TICKET',
-			ticket: ticket.data,
-		});
+	let headers = {"Content-Type": "application/json"};
+    let {token} = getState().authentication;
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+	return api.fetchMyTicketToEdit(headers, id).then(response => {
+		if (response.status === 200) {
+			return dispatch({
+				type: 'EDIT_TICKET',
+				ticket: response.data,
+			});
+		}
 	})
-	.catch(error => {
-		console.log(error);
-	});
+	.catch (error => {
+		if(error.response) {
+  			console.log(error.response.data);
+	        console.log(error.response.status);
+	        console.log(error.response.headers);
+
+      		dispatch({
+      			type: "AUTHENTICATION_ERROR", 
+      			data: error.response.data
+      		});
+		}
+   
+    }) 
 
 };
 
-export const updateTicket = (values) => (dispatch) => {
+export const updateTicket = (values) => (dispatch, getState) => {
 	console.log(values);
 
-	api.updateTicket(values).then(response => {
+	let headers = {"Content-Type": "application/json"};
+    let {token} = getState().authentication;
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+	return api.updateTicket(headers, values).then(response => {
 		console.log(response);
 		console.log(response.data);
+		if (response.status === 200) {
+            dispatch({
+				type: 'TICKET_SUCCESSFULLY_EDITED',
+				data: response.data,
+			});
+            return api.fetchMyTickets(headers).then(response => {
 
-		dispatch({
-			type: 'FETCH_MY_EDITED_TICKETS',
-			editedTicket: values
-		});
+				if (response.status === 200) {
+		          return dispatch({
+						type: 'FETCH_MY_TICKETS',
+						myTickets: response.data,
+					});
+		        }
+		
+			})
+			.catch (error => {
+				if(error.response) {
+		  			console.log(error.response.data);
+			        console.log(error.response.status);
+			        console.log(error.response.headers);
+
+		      		dispatch({
+		      			type: "AUTHENTICATION_ERROR", 
+		      			data: error.response.data
+		      		});
+				}
+		   
+		    })     
+        }
+		
 	})
-	.catch(error => {
-		console.log(error);
-	});
+	.catch (error => {
+		if(error.response) {
+  			console.log(error.response.data);
+	        console.log(error.response.status);
+	        console.log(error.response.headers);
+
+      		dispatch({
+      			type: "TICKET_EDIT_FAILED", 
+      			data: error.response.data
+      		});
+		}
+   
+    }) 
 };
 
-export const createTicket = (values) => (dispatch) => {
+export const createTicket = (values) => (dispatch, getState) => {
 
-	console.log('CREATE TICKET VALUES:');
-	console.log(values.assignee.id);
-	console.log(values.assignee.email);
-	console.log(values.assignee.name);
+	let headers = {"Content-Type": "application/json"};
+    let {token} = getState().authentication;
 
-	// values.author = values.assignee;
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
 
-	api.createTicket(values).then(response => {
+    console.log(JSON.stringify(values));
 
-		dispatch({
-			type: 'FETCH_MY_ADDED_TICKETS',
-			createdTicket: response.data,
-		});     
+	return api.createTicket(headers, values).then(response => {
+		if (response.status === 201) {
+			return dispatch({
+				type: 'TICKET_SUCCESSFULLY_CREATED',
+				data: response.data,
+			});
+        } 
+		     
 	})
-	.catch(error => {
-		console.log(error);
-	});
+	.catch (error => {
+		if(error.response) {
+  			console.log(error.response.data);
+	        console.log(error.response.status);
+	        console.log(error.response.headers);
+
+      		dispatch({
+      			type: "TICKET_CREATION_FAILED", 
+      			data: error.response.data
+      		});
+		}
+   
+    }) 
 };
 
-export const loginUser = (values) => (dispatch) => {
-	console.log("LOGIN_USER");
-	api.loginUser(values);
+// export const loginUser = (values) => (dispatch) => {
+// 	console.log("LOGIN_USER");
+// 	api.loginUser(values);
+// };
+
+// export const createUser = (values) => (dispatch) => {
+// 	console.log("CREATE_USER");
+// 	api.createUser(values);
+// };
+
+export const loadUser = () => (dispatch, getState) => {
+    dispatch({
+    	type: "USER_LOADING"
+    });
+
+    const token = getState().authentication.token;
+
+    let headers = {
+      	"Content-Type": "application/json",
+    };
+
+    if (token) {
+      	headers["Authorization"] = `Token ${token}`;
+    }
+
+    console.log('headers: ' + JSON.stringify(headers))
+    
+	return api.getAuthenticatedUser(headers)
+	.then(res => {
+		
+    	if (res.status === 200) {
+      		dispatch({
+      			type: 'USER_LOADED', 
+      			user: res.data 
+      		});
+      		return res.data;
+    	} 
+    })
+    .catch (error => {
+		if(error.response) {
+  			console.log(error.response.data);
+	        console.log(error.response.status);
+	        console.log(error.response.headers);
+
+	        if (error.response.status >= 400 && error.response.status < 500) {
+	      		dispatch({
+	      			type: "AUTHENTICATION_ERROR", 
+	      			data: error.response.data
+	      		});
+      		}
+		}
+   
+    })   
 };
 
-export const createUser = (values) => (dispatch) => {
-	console.log("CREATE_USER");
-	api.createUser(values);
+export const login = (values) => (dispatch) => {
+    // let headers = {"Content-Type": "application/json"};
+    // let body = JSON.stringify({email, password});
+
+    return api.login(values)
+    .then(res => {
+        if (res.status === 200) {
+            dispatch({
+            	type: 'LOGIN_SUCCESSFUL', 
+            	data: res.data 
+            });
+            return res.data;
+        } 
+    })
+    .catch (error => {
+		if(error.response) {
+  			console.log(error.response.data);
+	        console.log(error.response.status);
+	        console.log(error.response.headers);
+
+	        if (error.response.status === 403 || error.response.status === 401) {
+	      		dispatch({
+	      			type: "AUTHENTICATION_ERROR", 
+	      			data: error.response.data
+	      		});
+      		} else {
+      			dispatch({
+      				type: "LOGIN_FAILED", 
+      				data: error.response.data});
+      		}
+		}
+   
+    })   
+};
+
+export const register = (values) => (dispatch) => {
+	return api.register(values)
+    .then(res => {
+        if (res.status === 200) {
+            dispatch({
+            	type: 'REGISTRATION_SUCCESSFUL', 
+            	data: res.data 
+            });
+            return res.data;
+        }
+    })
+
+    .catch (error => {
+		if(error.response) {
+  			console.log(error.response.data);
+	        console.log(error.response.status);
+	        console.log(error.response.headers);
+
+	        if (error.response.status === 403 || error.response.status === 401) {
+	      		dispatch({
+	      			type: "AUTHENTICATION_ERROR", 
+	      			data: error.response.data
+	      		});
+      		} else {
+      			dispatch({
+      				type: "REGISTRATION_FAILED", 
+      				data: error.response.data});
+      		}
+		}
+   
+    })   
 };

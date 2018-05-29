@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions, viewsets
 # from django.shortcuts import render
 from django.core.validators import validate_email
 from rest_framework.response import Response
@@ -8,6 +8,7 @@ from django.contrib.auth.hashers import check_password
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
+from knox.models import AuthToken
 
 import json
 
@@ -15,19 +16,6 @@ from . import models
 from . import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-
-# def index(request):
-#     return render(request, 'index.html')
-
-# @api_view(['POST'])
-# def register(request):
-#     if request.method == 'POST':
-#         serializer = serializers.UserSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def authenticate(email_matched_user, email=None, password=None):
     pwd_valid = check_password(password, email_matched_user.password)
@@ -39,28 +27,75 @@ def authenticate(email_matched_user, email=None, password=None):
         return user
     return None
 
-@api_view(['POST'])
-def login_user(request):
-    # serializer = serializers.UserSerializer(data=request.data)
-    data = json.loads(request.body)
+# @api_view(['POST'])
+# def login_user(request):
+#     data = json.loads(request.body)
+#
+#     try:
+#         validate_email(data['email'])
+#         email_matched_user = User.objects.get(email=data['email'])
+#         user = authenticate(email_matched_user, email=data['email'], password=data['password'])
+#     except User.DoesNotExist or ValidationError:
+#         print("USER DOESN'T EXIST OR EMAIL INVALID")
+#         return Response({"message": "User doesn't exist or email invalid..."})
+#
+#     if user is not None and user.is_active:
+#         login(request, user)
+#         print('IS_ACTIVE = TRUE')
+#         return Response({"message": "Logged In!"})
+#
+#     else:
+#         print('IS_ACTIVE = FALSE')
+#         return Response({"message": "Failed to login..."})
 
-    try:
-        validate_email(data['email'])
-        email_matched_user = User.objects.get(email=data['email'])
-        user = authenticate(email_matched_user, email=data['email'], password=data['password'])
-    except User.DoesNotExist or ValidationError:
-        print("USER DOESN'T EXIST OR EMAIL INVALID")
-        return Response({"message": "User doesn't exist or email invalid..."})
+class RegistrationAPI(generics.GenericAPIView):
+    serializer_class = serializers.CreateUserSerializer
 
-    if user is not None and user.is_active:
-        login(request, user)
-        print('IS_ACTIVE = TRUE')
-        return Response({"message": "Logged In!"})
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            "user": serializers.UserSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)
+        })
 
-    else:
-        print('IS_ACTIVE = FALSE')
-        return Response({"message": "Failed to login..."})
-    # return Response({'key': 'value'}, status=status.HTTP_200_OK)
+class LoginAPI(generics.GenericAPIView):
+    serializer_class = serializers.LoginUserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        return Response({
+            "user": serializers.UserSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)
+        })
+
+class UserAPI(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, ]
+    serializer_class = serializers.UserSerializer
+
+    def get_object(self):
+        return self.request.user
+
+class TicketViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated, ]
+    # serializer_class = serializers.TicketSerializer
+
+    def get_queryset(self):
+        return self.request.user.assignee_tickets.all()
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+    def get_serializer_class(self):
+        print(self.action)
+        if self.action == 'list' or self.action == 'retrieve':
+            return serializers.TicketSerializer
+        if self.action == 'create' or self.action == 'update':
+            return serializers.CreateUpdateTicketSerializer
+        return serializers.TicketSerializer
 
 class ListTicket(generics.ListCreateAPIView):
     queryset = models.Ticket.objects.all()

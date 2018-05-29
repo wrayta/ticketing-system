@@ -9,9 +9,9 @@ class TicketEditingPage extends Component {
 	handleUpdate = (values) => {
 		const { updateTicket, history } = this.props;
 
-		updateTicket(values);
-
-		history.push('/dashboard/');
+		updateTicket(values).then( () => {
+			history.push('/dashboard/');
+		});
 	}
 
 	handleEditCancel = () => {

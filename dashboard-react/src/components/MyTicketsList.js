@@ -8,6 +8,11 @@ import { withRouter } from 'react-router-dom';
 
 class MyTicketsList extends Component {
 
+    componentDidMount() {
+        const { fetchMyTickets } = this.props;
+
+        fetchMyTickets();
+    }
     // componentWillUpdate() {
     //     const { fetchMyTickets } = this.props;
     //     console.log('COMPONENT DID MOUNT');
