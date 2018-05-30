@@ -296,9 +296,43 @@ export const register = (values) => (dispatch) => {
       		} else {
       			dispatch({
       				type: "REGISTRATION_FAILED", 
-      				data: error.response.data});
+      				data: error.response.data
+      			});
       		}
 		}
    
     })   
 };
+
+export const logout = () => (dispatch, getState) => {
+    // let headers = {"Content-Type": "application/json"};
+    const token = getState().authentication.token;
+
+    let headers = {
+      	"Content-Type": "application/json",
+    };
+
+    if (token) {
+      	headers["Authorization"] = `Token ${token}`;
+    }
+
+    return api.logout(headers)
+    .then(res => {
+        if (res.status === 204) {
+            dispatch({
+            	type: 'LOGOUT_SUCCESSFUL'
+            });
+            return res.data;
+        }
+   })
+   .catch(error => {
+   		if(error.response) {
+	        if (error.response.status === 403 || error.response.status === 401) {
+	            dispatch({
+	            	type: "AUTHENTICATION_ERROR", 
+	            	data: error.response.data
+	            });
+	        }
+    	}
+    })   
+}

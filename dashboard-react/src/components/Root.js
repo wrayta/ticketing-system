@@ -47,9 +47,9 @@ class Root extends Component {
 							component={LoginRegister} />
 						<Route exact path='/sign-up'
 							component={SignUpPage} />
-						<Route path='/dashboard' 
+						<PrivateRoute path='/dashboard' 
 							component={DashboardPage} />
-						<Route exact path='/create-ticket'
+						<PrivateRoute exact path='/create-ticket'
 			                component={CreateTicketPage} />
 		            </Switch>
 				</Router>

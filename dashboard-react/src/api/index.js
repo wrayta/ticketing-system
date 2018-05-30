@@ -105,3 +105,7 @@ export const login = (values) => {
 export const register = (values) => {
 	return axios.post(`${API_URL}/auth/register/`, {...values, is_active: false});
 };
+
+export const logout = (headers) => {
+	return axios.post(`${API_URL}/auth/logout/`, {body: "", headers: headers});
+};

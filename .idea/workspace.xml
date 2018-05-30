@@ -2,23 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46832201-417b-4d2b-ade3-8500485fac77" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/actions/index.js" afterPath="$PROJECT_DIR$/dashboard-react/src/actions/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/api/index.js" afterPath="$PROJECT_DIR$/dashboard-react/src/api/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/components/CreateTicketPage.js" afterPath="$PROJECT_DIR$/dashboard-react/src/components/CreateTicketPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/components/LoginRegisterPage.js" afterPath="$PROJECT_DIR$/dashboard-react/src/components/LoginRegisterPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/components/MyTicketsList.js" afterPath="$PROJECT_DIR$/dashboard-react/src/components/MyTicketsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/components/DashboardPage.js" afterPath="$PROJECT_DIR$/dashboard-react/src/components/DashboardPage.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/components/Root.js" afterPath="$PROJECT_DIR$/dashboard-react/src/components/Root.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/components/SignUpPage.js" afterPath="$PROJECT_DIR$/dashboard-react/src/components/SignUpPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/components/TicketEditingPage.js" afterPath="$PROJECT_DIR$/dashboard-react/src/components/TicketEditingPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/reducers/index.js" afterPath="$PROJECT_DIR$/dashboard-react/src/reducers/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard-react/src/reducers/my-tickets-reducer.js" afterPath="$PROJECT_DIR$/dashboard-react/src/reducers/my-tickets-reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/models.py" afterPath="$PROJECT_DIR$/dashboard/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/serializers.py" afterPath="$PROJECT_DIR$/dashboard/serializers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/urls.py" afterPath="$PROJECT_DIR$/dashboard/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/views.py" afterPath="$PROJECT_DIR$/dashboard/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ticketingsystem/settings.py" afterPath="$PROJECT_DIR$/ticketingsystem/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ticketingsystem/urls.py" afterPath="$PROJECT_DIR$/ticketingsystem/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack-stats.dev.json" afterPath="$PROJECT_DIR$/webpack-stats.dev.json" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,10 +40,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dashboard/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
+            <state relative-caret-position="872">
               <caret line="96" column="34" lean-forward="false" selection-start-line="96" selection-start-column="6" selection-end-line="96" selection-end-column="34" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
@@ -87,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dashboard/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="96" column="59" lean-forward="true" selection-start-line="96" selection-start-column="59" selection-end-line="96" selection-end-column="59" />
+            <state relative-caret-position="818">
+              <caret line="96" column="20" lean-forward="false" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
               <folding>
                 <element signature="e#0#58#0" expanded="true" />
               </folding>
@@ -785,22 +772,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dashboard/serializers.py">
+    <entry file="file://$PROJECT_DIR$/dashboard/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="96" column="34" lean-forward="false" selection-start-line="96" selection-start-column="6" selection-end-line="96" selection-end-column="34" />
+        <state relative-caret-position="818">
+          <caret line="96" column="20" lean-forward="false" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dashboard/views.py">
+    <entry file="file://$PROJECT_DIR$/dashboard/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="96" column="59" lean-forward="true" selection-start-line="96" selection-start-column="59" selection-end-line="96" selection-end-column="59" />
+        <state relative-caret-position="872">
+          <caret line="96" column="34" lean-forward="false" selection-start-line="96" selection-start-column="6" selection-end-line="96" selection-end-column="34" />
           <folding>
-            <element signature="e#0#58#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>

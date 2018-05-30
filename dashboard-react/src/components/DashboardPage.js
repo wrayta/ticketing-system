@@ -2,9 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import MyTicketsList from './MyTicketsList';
 import TicketEditingPage from '../components/TicketEditingPage';
+import * as actions from '../actions/index';
 import { Route, Link } from 'react-router-dom';
+import { getAuthentication } from '../reducers/authentication-reducer';
 
-const DashboardPage = props => {
+let DashboardPage = props => {
+    const { user, logout } = props;
     return (
         <table>
             <tr>
@@ -13,6 +16,11 @@ const DashboardPage = props => {
                     to='/create-ticket'>
                     Create Ticket
                     </Link>
+                </td>
+                <td>
+                    <div style={{textAlign: "right"}}>
+                        {user.name} (<a onClick={logout}>logout</a>)
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -27,5 +35,16 @@ const DashboardPage = props => {
         </table>
     );
 }
+
+const mapStateToDashboardPageProps = (state) => {
+    return {
+        user: getAuthentication(state).user,
+    }
+};
+
+DashboardPage = connect(
+    mapStateToDashboardPageProps,
+    actions
+)(DashboardPage);
 
 export default DashboardPage;
