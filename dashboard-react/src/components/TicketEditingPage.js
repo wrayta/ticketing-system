@@ -24,10 +24,20 @@ class TicketEditingPage extends Component {
 		history.push('/dashboard/');
 	}
 
+	handleDelete = (id) => {
+		console.log('id: ' + id);
+		const { deleteTicket, history } = this.props;
+
+		deleteTicket(id).then( () => {
+			history.push('/dashboard/');
+		});
+
+	}
+
 	render() {
 		
 		return (
-			<TicketEditingForm onSubmit={this.handleUpdate} handleCancel={this.handleEditCancel} />
+			<TicketEditingForm onSubmit={this.handleUpdate} handleCancel={this.handleEditCancel} handleDelete={this.handleDelete} />
 		);
 	}
 }

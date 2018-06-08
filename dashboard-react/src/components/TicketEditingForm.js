@@ -4,11 +4,12 @@ import { getUsers } from '../reducers/users-reducer';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { getAuthentication } from '../reducers/authentication-reducer';
 import ObjectSelect from './ObjectSelect';
 
 let TicketEditingForm = props => {
 
-	const { ticket, users, handleSubmit, handleCancel } = props;
+	const { ticket, users, loggedInUser, handleSubmit, handleCancel, handleDelete } = props;
 
 	// let assigneeFields = [];
 
@@ -59,10 +60,10 @@ let TicketEditingForm = props => {
 			<div>
 				<label>Assignee:</label>
 				{ticket.assignee.name}<br/>
-				<Field name="assignee" component={ObjectSelect} options={users} /><br/>
+				<Field name="assignee" component={ObjectSelect} user={loggedInUser} options={users} /><br/>
 			</div>
 
-			<button type="button">Delete</button>
+			<button type="button" onClick={() => handleDelete(ticket.id)}>Delete</button>
 			<button type="button" onClick={handleCancel}>Cancel</button>
 			<button type="submit">Save</button>
 		</form>
@@ -74,6 +75,7 @@ const mapStateToTicketEditingFormProps = (state) => {
 	return {
 		ticket: getTicketToEdit(state),
 		users: getUsers(state),
+		loggedInUser: getAuthentication(state).user
 	}
 };
 

@@ -145,6 +145,64 @@ export const updateTicket = (values) => (dispatch, getState) => {
     }) 
 };
 
+export const deleteTicket = (id) => (dispatch, getState) => {
+    let headers = {"Content-Type": "application/json"};
+    let {token} = getState().authentication;
+
+    if (token) {
+        headers["Authorization"] = `Token ${token}`;
+    }
+
+    // let noteId = getState().notes[index].id;
+
+    return api.deleteTicket(headers, id).then(response => {
+        if (response.status === 204) {
+            dispatch({
+            	type: 'TICKET_SUCCESSFULLY_DELETED', 
+            	id
+            });
+        
+	        return api.fetchMyTickets(headers).then(response => {
+
+				if (response.status === 200) {
+		          return dispatch({
+						type: 'FETCH_MY_TICKETS',
+						myTickets: response.data,
+					});
+		        }
+			
+			})
+			.catch (error => {
+				if(error.response) {
+		  			console.log(error.response.data);
+			        console.log(error.response.status);
+			        console.log(error.response.headers);
+
+		      		dispatch({
+		      			type: "AUTHENTICATION_ERROR", 
+		      			data: error.response.data
+		      		});
+				}
+		   
+		    })  
+		} 
+
+    })
+    .catch (error => {
+		if(error.response) {
+  			console.log(error.response.data);
+	        console.log(error.response.status);
+	        console.log(error.response.headers);
+
+      		dispatch({
+      			type: "TICKET_DELETION_FAILED", 
+      			data: error.response.data
+      		});
+		}
+   
+    }) 
+}
+
 export const createTicket = (values) => (dispatch, getState) => {
 
 	let headers = {"Content-Type": "application/json"};

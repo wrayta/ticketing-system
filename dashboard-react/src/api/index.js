@@ -48,9 +48,17 @@ export const updateTicket = (headers, values) => {
 		url: `${API_URL}/tickets/${values.id}/`,
 		headers: headers,
 		data: data
-	})
+	});
 
 	// return axios.put(`${API_URL}/tickets/${values.id}/`, data);
+};
+
+export const deleteTicket = (headers, id) => {
+	return axios({
+		method: 'delete',
+		url: `${API_URL}/tickets/${id}/`,
+		headers: headers,
+	});
 };
 
 export const createTicket = (headers, values) => {
@@ -65,7 +73,7 @@ export const createTicket = (headers, values) => {
 		url: `${API_URL}/tickets/`,
 		headers: headers,
 		data: data
-	})
+	});
 
 	// return axios.post(`${API_URL}/tickets/`, data);
 };

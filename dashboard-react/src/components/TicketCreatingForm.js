@@ -4,10 +4,11 @@ import * as actions from '../actions/index';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import ObjectSelect from './ObjectSelect';
+import { getAuthentication } from '../reducers/authentication-reducer';
 
 let TicketCreatingForm = props => {
 
-	const { users, handleSubmit, handleCancel } = props;
+	const { users, handleSubmit, handleCancel, loggedInUser } = props;
 
 	// let assigneeFields = [];
 
@@ -37,7 +38,7 @@ let TicketCreatingForm = props => {
 
 			<div>
 				<label>Assignee:</label>
-				<Field name="assignee" component={ObjectSelect} options={users} /><br/>
+				<Field name="assignee" component={ObjectSelect} user={loggedInUser} options={users} /><br/>
 			</div>
 
 			<button type="button" onClick={handleCancel}>Cancel</button>
@@ -48,7 +49,8 @@ let TicketCreatingForm = props => {
 
 const mapStateToTicketCreatingFormProps = (state) => {
 	return {
-		users: getUsers(state)
+		users: getUsers(state),
+		loggedInUser: getAuthentication(state).user,
 	}
 };
 
@@ -60,5 +62,14 @@ TicketCreatingForm = connect(
 TicketCreatingForm = reduxForm({
 	form: 'ticketCreatingForm'
 })(TicketCreatingForm);
+
+TicketCreatingForm = connect(
+	state => ({
+		initialValues: {
+			assignee: getAuthentication(state).user
+		}
+	}),
+
+)(TicketCreatingForm);
 
 export default TicketCreatingForm;
