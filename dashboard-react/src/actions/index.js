@@ -2,6 +2,10 @@ import * as api from '../api';
 
 export const fetchMyTickets = () => (dispatch, getState) => {
 
+	dispatch({
+		type: 'LOCATION_CHANGE'
+	});
+
 	let headers = {"Content-Type": "application/json"};
 
 	let {token} = getState().authentication;
@@ -15,8 +19,18 @@ export const fetchMyTickets = () => (dispatch, getState) => {
 		console.log(response.data);
 
 		if (response.status === 200) {
-          return dispatch({
+            dispatch({
 				type: 'FETCH_MY_TICKETS',
+				myTickets: response.data,
+			});
+
+			dispatch({
+				type: 'FILTER_OPEN_TICKETS',
+			});
+
+			return dispatch({
+				type: 'FETCH_FILTERED_TICKETS',
+				filters: getState().filters,
 				myTickets: response.data,
 			});
         }
@@ -107,11 +121,22 @@ export const updateTicket = (values) => (dispatch, getState) => {
             return api.fetchMyTickets(headers).then(response => {
 
 				if (response.status === 200) {
-		          return dispatch({
+		            dispatch({
 						type: 'FETCH_MY_TICKETS',
 						myTickets: response.data,
 					});
+
+			  //       dispatch({
+					// 	type: 'FILTER_OPEN_TICKETS',
+					// });
+
+					return dispatch({
+						type: 'FETCH_FILTERED_TICKETS',
+						filters: getState().filters,
+						myTickets: response.data,
+					});
 		        }
+
 		
 			})
 			.catch (error => {
@@ -165,8 +190,14 @@ export const deleteTicket = (id) => (dispatch, getState) => {
 	        return api.fetchMyTickets(headers).then(response => {
 
 				if (response.status === 200) {
-		          return dispatch({
+		            dispatch({
 						type: 'FETCH_MY_TICKETS',
+						myTickets: response.data,
+					});
+
+		            return dispatch({
+						type: 'FETCH_FILTERED_TICKETS',
+						filters: getState().filters,
 						myTickets: response.data,
 					});
 		        }
@@ -394,3 +425,33 @@ export const logout = () => (dispatch, getState) => {
     	}
     })   
 }
+
+export const filterOpenTickets = () => (dispatch) => {
+	console.log("filtering open");
+	dispatch({
+		type: "FILTER_OPEN_TICKETS"
+	});
+};
+
+export const filterClosedTickets = () => (dispatch) => {
+	console.log("filtering closed");
+	dispatch({
+		type: "FILTER_CLOSED_TICKETS"
+	});
+};
+
+export const filterTicketsByTitle = text => (dispatch) => {
+	dispatch({
+		type: "FILTER_TICKETS_BY_TITLE",
+		text: text
+	});
+};
+
+export const applyFilters = () => (dispatch, getState) => {
+
+	dispatch({
+		type: "FETCH_FILTERED_TICKETS",
+		myTickets: getState().myTickets,
+		filters: getState().filters,
+	});
+};

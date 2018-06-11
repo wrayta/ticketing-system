@@ -5,6 +5,7 @@ import TicketEditingPage from '../components/TicketEditingPage';
 import * as actions from '../actions/index';
 import { Route, Link } from 'react-router-dom';
 import { getAuthentication } from '../reducers/authentication-reducer';
+import FilterToggle from './FilterToggle';
 
 let DashboardPage = props => {
     const { user, logout } = props;
@@ -31,6 +32,11 @@ let DashboardPage = props => {
                     <Route exact path='/dashboard/edit-ticket/:id'
                     component={TicketEditingPage} /> 
                 </td>                             
+            </tr>
+            <tr>
+                <td>    
+                    <FilterToggle />
+                </td>
             </tr>
         </table>
     );
