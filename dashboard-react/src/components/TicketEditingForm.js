@@ -1,79 +1,83 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { getTicketToEdit } from '../reducers/edit-ticket-reducer';
 import { getUsers } from '../reducers/users-reducer';
+import { getEditForm } from '../reducers/edit-form-reducer';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
 import { getAuthentication } from '../reducers/authentication-reducer';
 import ObjectSelect from './ObjectSelect';
 
-let TicketEditingForm = props => {
+class TicketEditingForm extends Component {
 
-	const { ticket, users, loggedInUser, handleSubmit, handleCancel, handleDelete } = props;
+	changeAssignee = (id, value) => {
+		const { handleEditFormFieldUpdate } = this.props;
 
-	// let assigneeFields = [];
+		handleEditFormFieldUpdate(id, value);
+	}
+	
 
-	// users.map( (user) => {
-	// 	console.log("User id: " + user.id);
-	// 	console.log("User email: " + user.email);
-	// 	console.log("User name: " + user.first_name + ' ' + user.last_name);
-	// 	assigneeFields.push(
-	// 		{ id: user.id, email: user.email, name: user.first_name + ' ' + user.last_name }
-	// 	)}
-	// );
+	onSubmit = e => {
+		const { handleUpdate, editForm } = this.props;
+		e.preventDefault();
+		handleUpdate(editForm);
+	}
 
-	// console.log(assigneeFields[0]);
+	render() {
 
-	return (
-		<form onSubmit={handleSubmit}>
-			<div>
-				<label>Title:</label>
-				<Field name="title" component="input" type="text" /><br/>
-			</div>
+		const { errors, ticket, editForm, users, loggedInUser, handleEditFormFieldUpdate, handleCancel, handleDelete } = this.props;
 
-			<div>
-				<label>Description:</label>
-				<Field name="description" component="textarea" type="text" /><br/>
-			</div>
+		return (
+			<form onSubmit={this.onSubmit} key={ticket.id}>
+				<div>
+					<label htmlFor="title">Title:</label>
+					<input type="text" id="title" defaultValue={ticket.title} onChange={e => handleEditFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
 
-			<div>
-				<label>Status:</label><br/>
-				Open <Field name="status" component="input" type="radio" value="OPEN" />{' '}
-				Closed <Field name="status" component="input" type="radio" value="CLOSED" /><br/>
-			</div>
+				<div>
+					<label htmlFor="description">Description:</label>
+					<input type="textarea" id="description" defaultValue={ticket.description} onChange={e => handleEditFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
 
-			<div>
-				<label>Created Date:</label> 
-				<input type="text" name="created_date" readOnly value={ticket.created_date} /><br/>
-			</div>
+				<div>
+					<label htmlFor="status">Status:</label><br/>
+					Open <input type="radio" id="open_status" checked={editForm.status === "OPEN" ? true : false} value="OPEN" onChange={e => handleEditFormFieldUpdate(e.target.id, e.target.value)}/>{' '}
+					Closed <input type="radio" id="closed_status" checked={editForm.status === "CLOSED" ? true : false} value="CLOSED" onChange={e => handleEditFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
 
-			<div>
-				<label>Modified Date:</label>
-				<input type="text" name="modified_date" readOnly value={ticket.modified_date} /><br/>
-			</div>
+				<div>
+					<label htmlFor="created_date">Created Date:</label> 
+					<input type="text" id="created_date" readOnly={true} value={ticket.created_date} /><br/>
+				</div>
 
-			<div>
-				<label>Author:</label>
-				<input type="text" name="author" readOnly value={ticket.author.name} /><br/>
-			</div>
+				<div>
+					<label htmlFor="modified_date">Modified Date:</label>
+					<input type="text" id="modified_date" readOnly={true} value={ticket.modified_date} /><br/>
+				</div>
 
-			<div>
-				<label>Assignee:</label>
-				{ticket.assignee.name}<br/>
-				<Field name="assignee" component={ObjectSelect} user={loggedInUser} options={users} /><br/>
-			</div>
+				<div>
+					<label htmlFor="author">Author:</label>
+					<input type="text" id="author" readOnly={true} value={ticket.author.name} /><br/>
+				</div>
 
-			<button type="button" onClick={() => handleDelete(ticket.id)}>Delete</button>
-			<button type="button" onClick={handleCancel}>Cancel</button>
-			<button type="submit">Save</button>
-		</form>
-	);
+				<div>
+					<label htmlFor="assignee">Assignee:</label>
+					{ticket.assignee.name}<br/>
+					<ObjectSelect id="assignee" changeAssignee={this.changeAssignee} user={loggedInUser} options={users} /><br/>
+				</div>
 
-};
+				<button type="button" onClick={() => handleDelete(ticket.id)}>Delete</button>
+				<button type="button" onClick={handleCancel}>Cancel</button>
+				<button type="submit">Save</button>
+			</form>
+		);
+	}
+
+}
 
 const mapStateToTicketEditingFormProps = (state) => {
 	return {
 		ticket: getTicketToEdit(state),
+		editForm: getEditForm(state),
 		users: getUsers(state),
 		loggedInUser: getAuthentication(state).user
 	}
@@ -82,18 +86,6 @@ const mapStateToTicketEditingFormProps = (state) => {
 TicketEditingForm = connect(
 	mapStateToTicketEditingFormProps,
 	actions
-)(TicketEditingForm);
-
-TicketEditingForm = reduxForm({
-	form: 'ticketEditingForm',
-	enableReinitialize: true,
-})(TicketEditingForm);
-
-TicketEditingForm = connect(
-	state => ({
-		initialValues: getTicketToEdit(state)
-	}),
-
 )(TicketEditingForm);
 
 export default TicketEditingForm;

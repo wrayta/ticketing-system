@@ -32,7 +32,7 @@ class CreateTicketPage extends Component {
 	 //        return <Redirect to='/dashboard/' />
 	 //    }
 		return (
-			<TicketCreatingForm onSubmit={this.handleCreate} handleCancel={this.handleCreateCancel} />
+			<TicketCreatingForm handleCreate={this.handleCreate} handleCancel={this.handleCreateCancel} />
 		);
 	}
 };

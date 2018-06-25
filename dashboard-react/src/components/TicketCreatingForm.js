@@ -1,56 +1,58 @@
-import React from 'react';
+import React, { Component} from 'react';
 import { getUsers } from '../reducers/users-reducer';
+import { getCreateForm } from '../reducers/create-form-reducer';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+// import { Field, reduxForm } from 'redux-form';
 import ObjectSelect from './ObjectSelect';
 import { getAuthentication } from '../reducers/authentication-reducer';
 
-let TicketCreatingForm = props => {
+class TicketCreatingForm extends Component {
 
-	const { users, handleSubmit, handleCancel, loggedInUser } = props;
+	changeAssignee = (id, value) => {
+		const { handleCreateFormFieldUpdate } = this.props;
 
-	// let assigneeFields = [];
+		handleCreateFormFieldUpdate(id, value);	
+	}
 
-	// users.map( (user) => {
-		// console.log("User id: " + user.id);
-		// console.log("User email: " + user.email);
-		// console.log("User name: " + user.first_name + ' ' + user.last_name);
-		// assigneeFields.push(
-		// 	users
-		// );
-	// }
-	// );
+	onSubmit = e => {
+		const { handleCreate, createForm } = this.props;
+		e.preventDefault();
+		handleCreate(createForm);
+	}
 
-	// console.log(assigneeFields[0]);
+	render() {
+		const { users, handleCreateFormFieldUpdate, handleCancel, loggedInUser } = this.props;
 
-	return (
-		<form onSubmit={handleSubmit}>
-			<div>
-				<label>Title:</label>
-				<Field name="title" component="input" type="text" /><br/>
-			</div>
+		return (
+			<form onSubmit={this.onSubmit}>
+				<div>
+					<label htmlFor="title">Title:</label>
+					<input type="text" id="title" onChange={e => handleCreateFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
 
-			<div>
-				<label>Description:</label>
-				<Field name="description" component="textarea" type="text" /><br/>
-			</div>
+				<div>
+					<label htmlFor="description">Description:</label>
+					<input type="textarea" id="description" onChange={e => handleCreateFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
 
-			<div>
-				<label>Assignee:</label>
-				<Field name="assignee" component={ObjectSelect} user={loggedInUser} options={users} /><br/>
-			</div>
+				<div>
+					<label htmlFor="assignee">Assignee:</label>
+					<ObjectSelect id="assignee" changeAssignee={this.changeAssignee} user={loggedInUser} options={users} /><br/>
+				</div>
 
-			<button type="button" onClick={handleCancel}>Cancel</button>
-			<button type="submit">Create</button>
-		</form>
-	);
-};
+				<button type="button" onClick={handleCancel}>Cancel</button>
+				<button type="submit">Create</button>
+			</form>
+		);
+	}
+}
 
 const mapStateToTicketCreatingFormProps = (state) => {
 	return {
 		users: getUsers(state),
 		loggedInUser: getAuthentication(state).user,
+		createForm: getCreateForm(state),
 	}
 };
 
@@ -59,17 +61,17 @@ TicketCreatingForm = connect(
 	actions
 )(TicketCreatingForm);
 
-TicketCreatingForm = reduxForm({
-	form: 'ticketCreatingForm'
-})(TicketCreatingForm);
+// TicketCreatingForm = reduxForm({
+// 	form: 'ticketCreatingForm'
+// })(TicketCreatingForm);
 
-TicketCreatingForm = connect(
-	state => ({
-		initialValues: {
-			assignee: getAuthentication(state).user
-		}
-	}),
+// TicketCreatingForm = connect(
+// 	state => ({
+// 		initialValues: {
+// 			assignee: getAuthentication(state).user
+// 		}
+// 	}),
 
-)(TicketCreatingForm);
+// )(TicketCreatingForm);
 
 export default TicketCreatingForm;

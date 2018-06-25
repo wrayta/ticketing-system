@@ -78,9 +78,13 @@ export const editTicket = (id) => (dispatch, getState) => {
 
 	return api.fetchMyTicketToEdit(headers, id).then(response => {
 		if (response.status === 200) {
-			return dispatch({
+			dispatch({
 				type: 'EDIT_TICKET',
 				ticket: response.data,
+			});
+			return dispatch({
+				type: 'EDIT_FORM_INITIAL_STATE',
+				values: response.data,
 			});
 		}
 	})
@@ -97,6 +101,74 @@ export const editTicket = (id) => (dispatch, getState) => {
 		}
    
     }) 
+
+};
+
+export const handleCreateFormFieldUpdate = (formFieldId, value) => (dispatch, getState) => {
+	switch (formFieldId) {
+		case 'title':
+			dispatch({
+				type: 'UPDATE_CREATE_TITLE',
+				values: value
+			});
+			break;
+		case 'description':
+			dispatch({
+				type: 'UPDATE_CREATE_DESCRIPTION',
+				values: value
+			});
+			break;
+		case 'assignee':
+			dispatch({
+				type: 'UPDATE_CREATE_ASSIGNEE',
+				values: value
+			});
+			break;
+	}
+};
+
+export const handleEditFormFieldUpdate = (formFieldId, value) => (dispatch, getState) => {
+	console.log(value);
+
+	switch (formFieldId) {
+		case 'title':
+			dispatch({
+				type: 'UPDATE_EDIT_TITLE',
+				values: value
+			});
+			break;
+
+		case 'description':
+			dispatch({
+				type: 'UPDATE_EDIT_DESCRIPTION',
+				values: value
+			});
+			break;
+
+		case 'open_status':
+			dispatch({
+				type: 'UPDATE_EDIT_OPEN_STATUS',
+				values: value
+			});
+			break;
+
+		case 'closed_status':
+			dispatch({
+				type: 'UPDATE_EDIT_CLOSED_STATUS',
+				values: value
+			});
+			break;
+
+		case 'assignee':
+			dispatch({
+				type: 'UPDATE_EDIT_ASSIGNEE',
+				values: value
+			});
+			break;
+
+		default:
+			break;
+	}
 
 };
 
@@ -304,6 +376,10 @@ export const loadUser = () => (dispatch, getState) => {
       			type: 'USER_LOADED', 
       			user: res.data 
       		});
+      		dispatch({
+            	type: 'CREATE_FORM_INITIAL_STATE',
+            	values: res.data
+            });
       		return res.data;
     	} 
     })

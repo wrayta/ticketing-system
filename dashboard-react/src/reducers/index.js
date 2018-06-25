@@ -8,6 +8,8 @@ import authentication from './authentication-reducer';
 import ticketStatus from './ticket-status-reducer';
 import filters from './filters-reducer';
 import myFilteredTickets from './filtered-tickets-reducer';
+import editForm from './edit-form-reducer';
+import createForm from './create-form-reducer';
 
 const rootReducer = combineReducers({
   myTickets,
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   ticketStatus,
   filters,
   myFilteredTickets,
+  editForm,
+  createForm,
   form: formReducer
 });
 

@@ -1,9 +1,6 @@
-import React from 'react';
 import axios from 'axios';
-import qs from 'qs';
 
 const API_URL = 'http://127.0.0.1:8000/api';
-const ROOT_URL = 'http://127.0.0.1:3000';
 
 // axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 // axios.defaults.xsrfCookieName = "csrftoken";
@@ -42,6 +39,7 @@ export const updateTicket = (headers, values) => {
 		...values,
 		assignee: values.assignee.id,
 	};
+	console.log("Values.id: " + values.id);
 
 	return axios({
 		method: 'put',

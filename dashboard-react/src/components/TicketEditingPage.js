@@ -12,6 +12,9 @@ class TicketEditingPage extends Component {
 		updateTicket(values).then( () => {
 			history.push('/dashboard/');
 		});
+
+		// console.log("HANDLE UPDATE");
+		// console.log(JSON.stringify(values));
 	}
 
 	handleEditCancel = () => {
@@ -37,7 +40,7 @@ class TicketEditingPage extends Component {
 	render() {
 		
 		return (
-			<TicketEditingForm onSubmit={this.handleUpdate} handleCancel={this.handleEditCancel} handleDelete={this.handleDelete} />
+			<TicketEditingForm handleUpdate={this.handleUpdate} handleCancel={this.handleEditCancel} handleDelete={this.handleDelete} />
 		);
 	}
 }

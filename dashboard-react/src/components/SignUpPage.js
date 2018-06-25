@@ -8,7 +8,7 @@ import { withRouter, Link, Redirect } from 'react-router-dom';
 class SignUpPage extends Component {
 
 	register = (values) => {
-		const { register, history } = this.props;
+		const { register } = this.props;
 
 		register(values);
 
