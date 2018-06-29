@@ -10,6 +10,8 @@ import filters from './filters-reducer';
 import myFilteredTickets from './filtered-tickets-reducer';
 import editForm from './edit-form-reducer';
 import createForm from './create-form-reducer';
+import loginForm from './login-form-reducer';
+import registerForm from './register-form-reducer';
 
 const rootReducer = combineReducers({
   myTickets,
@@ -22,6 +24,8 @@ const rootReducer = combineReducers({
   myFilteredTickets,
   editForm,
   createForm,
+  loginForm,
+  registerForm,
   form: formReducer
 });
 

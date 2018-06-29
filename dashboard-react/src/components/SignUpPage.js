@@ -28,7 +28,7 @@ class SignUpPage extends Component {
 				<table>
 					<tr>
 						<td> 
-							<UserRegisterForm onSubmit={this.register} /> 
+							<UserRegisterForm register={this.register} /> 
 						</td>
 					</tr>
 					<tr>

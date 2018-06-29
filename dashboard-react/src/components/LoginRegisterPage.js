@@ -28,7 +28,7 @@ class LoginRegisterPage extends Component {
 				<table>
 					<tr>
 						<td> 
-							<UserLoginForm onSubmit={this.login} /> 
+							<UserLoginForm login={this.login} /> 
 						</td>
 					</tr>
 					<tr>

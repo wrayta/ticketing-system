@@ -104,6 +104,57 @@ export const editTicket = (id) => (dispatch, getState) => {
 
 };
 
+export const handleRegisterFormFieldUpdate = (formFieldId, value) => (dispatch, getState) => {
+	switch (formFieldId) {
+		case 'first_name':
+			dispatch({
+				type: 'UPDATE_REGISTER_FIRST_NAME',
+				values: value
+			});
+			break;
+		case 'last_name':
+			dispatch({
+				type: 'UPDATE_REGISTER_LAST_NAME',
+				values: value
+			});
+			break;
+		case 'email':
+			dispatch({
+				type: 'UPDATE_REGISTER_EMAIL',
+				values: value
+			});
+			break;
+		case 'username':
+			dispatch({
+				type: 'UPDATE_REGISTER_USERNAME',
+				values: value
+			});
+			break;
+		case 'password':
+			dispatch({
+				type: 'UPDATE_REGISTER_PASSWORD',
+				values: value
+			});
+			break;
+	}
+};
+
+export const handleUserLoginFormFieldUpdate = (formFieldId, value) => (dispatch, getState) => {
+	switch (formFieldId) {
+		case 'email':
+			dispatch({
+				type: 'UPDATE_LOGIN_EMAIL',
+				values: value
+			});
+			break;
+		case 'password':
+			dispatch({
+				type: 'UPDATE_LOGIN_PASSWORD',
+				values: value
+			});
+	}
+};
+
 export const handleCreateFormFieldUpdate = (formFieldId, value) => (dispatch, getState) => {
 	switch (formFieldId) {
 		case 'title':

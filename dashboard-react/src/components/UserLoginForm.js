@@ -1,29 +1,51 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { Component } from 'react';
+import * as actions from '../actions/index';
+import { connect } from 'react-redux';
+import { getLoginForm } from '../reducers/login-form-reducer';
+// import { Field, reduxForm } from 'redux-form';
 
-let UserLoginForm = props => {
+class UserLoginForm extends Component {
 
-	const { handleSubmit } = props;
+	onSubmit = e => {
+		const { login, loginForm } = this.props;
+		e.preventDefault();
+		login(loginForm);
+	}
 
-	return (
-		<form onSubmit={handleSubmit}>
-			<div>
-				<label>Email:</label>
-				<Field name="email" component="input" type="text" /><br/>
-			</div>
+	render() {
+		const { handleUserLoginFormFieldUpdate } = this.props;
 
-			<div>
-				<label>Password:</label>
-				<Field name="password" component="input" type="password" /><br/>
-			</div>
+		return (
+			<form onSubmit={this.onSubmit}>
+				<div>
+					<label>Email:</label>
+					<input type="text" id="email" onChange={e => handleUserLoginFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
 
-			<button type="submit">Login</button>
-		</form>
-	);
+				<div>
+					<label>Password:</label>
+					<input type="password" id="password" onChange={e => handleUserLoginFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
+
+				<button type="submit">Login</button>
+			</form>
+		);
+	}
 };
 
-UserLoginForm = reduxForm({
-	form: 'userLoginForm'
-})(UserLoginForm);
+const mapStateToUserLoginFormProps = (state) => {
+	return {
+		loginForm: getLoginForm(state),
+	}
+};
+
+UserLoginForm = connect(
+	mapStateToUserLoginFormProps,
+	actions
+)(UserLoginForm);
+
+// UserLoginForm = reduxForm({
+// 	form: 'userLoginForm'
+// })(UserLoginForm);
 
 export default UserLoginForm;

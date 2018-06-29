@@ -7,9 +7,8 @@ const initialState = {
 const filters = (state = initialState, action) => {
 
     switch (action.type) {
-    	case "LOCATION_CHANGE": {
+    	case "LOCATION_CHANGE":
     		return {};
-    	}
 
     	case "FILTER_OPEN_TICKETS":
     		return {

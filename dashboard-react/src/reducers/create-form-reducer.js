@@ -7,33 +7,27 @@ const initialState = {
 const createForm = (state = initialState, action) => {
 
 	switch (action.type) {
+		case 'LOCATION_CHANGE':
+    		return {};
+
 		case 'CREATE_FORM_INITIAL_STATE':
+		case 'UPDATE_CREATE_ASSIGNEE':
 			return {
 				...state,
 				assignee: action.values
-			}
-			break;
+			};
 
 		case 'UPDATE_CREATE_TITLE':
 			return {
 				...state,
 				title: action.values
-			}
-			break;
+			};
 
 		case 'UPDATE_CREATE_DESCRIPTION':
 			return {
 				...state,
 				description: action.values
-			}
-			break;
-
-		case 'UPDATE_CREATE_ASSIGNEE':
-			return {
-				...state,
-				assignee: action.values
-			}
-			break;
+			};
 
 		default:
 			return state;

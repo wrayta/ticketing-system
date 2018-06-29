@@ -1,44 +1,68 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { Component } from 'react';
+import * as actions from '../actions/index';
+import { connect } from 'react-redux';
+import { getRegisterForm } from '../reducers/register-form-reducer';
 
-let UserRegisterForm = props => {
+// import { Field, reduxForm } from 'redux-form';
 
-	const { handleSubmit } = props;
+class UserRegisterForm extends Component {
 
-	return (
-		<form onSubmit={handleSubmit}>
-			<div>
-				<label>First Name:</label>
-				<Field name="first_name" component="input" type="text" /><br/>
-			</div>
+	onSubmit = e => {
+		const { register, registerForm } = this.props;
+		e.preventDefault();
+		register(registerForm);
 
-			<div>
-				<label>Last Name:</label>
-				<Field name="last_name" component="input" type="text" /><br/>
-			</div>
+	}
 
-			<div>
-				<label>Email:</label>
-				<Field name="email" component="input" type="text" /><br/>
-			</div>
+	render() {
+		const { handleRegisterFormFieldUpdate } = this.props;
 
-			<div>
-				<label>Username:</label>
-				<Field name="username" component="input" type="text" /><br/>
-			</div>
+		return (
+			<form onSubmit={this.onSubmit}>
+				<div>
+					<label>First Name:</label>
+					<input type="text" id="first_name" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
 
-			<div>
-				<label>Password:</label>
-				<Field name="password" component="input" type="password" /><br/>
-			</div>
+				<div>
+					<label>Last Name:</label>
+					<input type="text" id="last_name" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
 
-			<button type="submit">Sign Up</button>
-		</form>
-	);
+				<div>
+					<label>Email:</label>
+					<input type="text" id="email" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
+
+				<div>
+					<label>Username:</label>
+					<input type="text" id="username" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
+
+				<div>
+					<label>Password:</label>
+					<input type="password" id="password" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+				</div>
+
+				<button type="submit">Sign Up</button>
+			</form>
+		);
+	}
 };
 
-UserRegisterForm = reduxForm({
-	form: 'userRegisterForm'
-})(UserRegisterForm);
+const mapStateToUserRegisterFormProps = (state) => {
+	return {
+		registerForm: getRegisterForm(state)
+	}
+};
+
+UserRegisterForm = connect(
+	mapStateToUserRegisterFormProps,
+	actions
+)(UserRegisterForm);
+
+// UserRegisterForm = reduxForm({
+// 	form: 'userRegisterForm'
+// })(UserRegisterForm);
 
 export default UserRegisterForm;

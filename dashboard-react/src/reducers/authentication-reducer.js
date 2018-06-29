@@ -57,6 +57,7 @@ const authentication = (state = initialState, action) => {
                 token: null, 
                 user: null,
                 isAuthenticated: false, 
+                isRegistered: false,
                 isLoading: false
             };
         case 'REGISTRATION_FAILED':

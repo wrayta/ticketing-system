@@ -13,10 +13,9 @@ import * as actions from '../actions/index'
 class Root extends Component {
 
 	componentDidMount() {
-        const { fetchUsers, loadUser } = this.props;
+        const { loadUser } = this.props;
         console.log('COMPONENT DID MOUNT');
         loadUser();
-        fetchUsers();     
     }
 
 	PrivateRoute = ({component: ChildComponent, ...rest}) => {
