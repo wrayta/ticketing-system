@@ -107,34 +107,111 @@ export const editTicket = (id) => (dispatch, getState) => {
 export const handleRegisterFormFieldUpdate = (formFieldId, value) => (dispatch, getState) => {
 	switch (formFieldId) {
 		case 'first_name':
+			if (!/^[a-zA-Z]+$/.test(value)) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'First name' must contain only letters",
+					error_field: 'first_name'
+				});
+			} else {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: null,
+					error_field: 'first_name'
+				});
+			}
+
 			dispatch({
 				type: 'UPDATE_REGISTER_FIRST_NAME',
 				values: value
 			});
 			break;
+
 		case 'last_name':
+			if (!/^[a-zA-Z]+$/.test(value)) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'Last name' must contain only letters",
+					error_field: 'last_name'
+				});
+			} else {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: null,
+					error_field: 'last_name'
+				});
+			}
+
 			dispatch({
 				type: 'UPDATE_REGISTER_LAST_NAME',
 				values: value
 			});
 			break;
+
 		case 'email':
+			if (!/^[a-z]+\.+[a-z]+@+[a-z]+\.+[a-z]+$/.test(value)) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'Email' must be of the format 'test@test.test'",
+					error_field: 'email'
+				});
+			} else {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: null,
+					error_field: 'email'
+				});
+			}
+
 			dispatch({
 				type: 'UPDATE_REGISTER_EMAIL',
 				values: value
 			});
 			break;
+
 		case 'username':
+			if (!/^[a-z]+\.+[a-z]+$/.test(value)) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'Username' must be of the format 'test.test'",
+					error_field: 'username'
+				});
+			} else {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: null,
+					error_field: 'username'
+				});
+			}
+
 			dispatch({
 				type: 'UPDATE_REGISTER_USERNAME',
 				values: value
 			});
 			break;
+
 		case 'password':
+			if (!/^[a-zA-Z]+$/.test(value)) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'Password' must contain only letters",
+					error_field: 'password'
+				});
+			} else {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: null,
+					error_field: 'password'
+				});
+			}
+
 			dispatch({
 				type: 'UPDATE_REGISTER_PASSWORD',
 				values: value
 			});
+			break;
+
+		default:
 			break;
 	}
 };

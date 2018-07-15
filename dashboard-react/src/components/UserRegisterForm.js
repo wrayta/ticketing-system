@@ -15,10 +15,17 @@ class UserRegisterForm extends Component {
 	}
 
 	render() {
-		const { handleRegisterFormFieldUpdate } = this.props;
+		const { handleRegisterFormFieldUpdate, errors } = this.props;
 
 		return (
 			<form onSubmit={this.onSubmit}>
+				{errors != null && (
+		            <ul>
+		            	{Object.keys(errors).map( errorKey => (
+		            		errors[errorKey] == null ? '' : <li>{errors[errorKey]}</li>
+		            	))}
+		            </ul>
+          		)}
 				<div>
 					<label>First Name:</label>
 					<input type="text" id="first_name" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
@@ -51,7 +58,14 @@ class UserRegisterForm extends Component {
 };
 
 const mapStateToUserRegisterFormProps = (state) => {
+	// let errors = [];
+	// if (state.authentication.errors) {
+	//     errors = Object.keys(state.authentication.errors).map(field => {
+	//        return {field, message: state.authentication.errors[field]};
+	//     });
+	// }
 	return {
+		errors: getRegisterForm(state).errors,
 		registerForm: getRegisterForm(state)
 	}
 };

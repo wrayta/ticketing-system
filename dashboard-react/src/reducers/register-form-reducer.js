@@ -3,7 +3,14 @@ const initialState = {
 	last_name: null,
 	email: null,
 	username: null,
-	password: null
+	password: null,
+	errors: {
+		first_name: null,
+		last_name: null,
+		email: null,
+		username: null,
+		password: null,
+	}
 };
 
 const registerForm = (state = initialState, action) => {
@@ -35,11 +42,19 @@ const registerForm = (state = initialState, action) => {
 				...state,
 				username: action.values
 			};
-			
+
 		case 'UPDATE_REGISTER_PASSWORD':
 			return {
 				...state,
 				password: action.values
+			};
+		case 'REGISTRATION_ERROR':
+			return {
+				...state,
+				errors: {
+					...state.errors,
+					[action.error_field]: action.values
+				}
 			};
 
 		default:
