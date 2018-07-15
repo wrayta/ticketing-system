@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TicketCreatingForm from './TicketCreatingForm';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
+import { getUsers } from '../reducers/users-reducer';
 // import { getTicketStatus } from '../reducers/ticket-status-reducer';
 import { withRouter } from 'react-router-dom';
 
@@ -25,6 +26,14 @@ class CreateTicketPage extends Component {
 		history.push('/dashboard/');
 	}
 
+	componentDidMount() {
+		const { users, fetchUsers } = this.props;
+
+		if (users.length == 0) {
+			fetchUsers();
+		}
+	}
+
 	render() {
 		// const { isCreated } = this.props;
 
@@ -43,8 +52,14 @@ class CreateTicketPage extends Component {
 // 	}
 // };
 
+const mapStateToCreateTicketPageProps = (state) => {
+	return {
+		users: getUsers(state),
+	}
+};
+
 CreateTicketPage = connect(
-	null,
+	mapStateToCreateTicketPageProps,
 	actions
 )(CreateTicketPage);
 

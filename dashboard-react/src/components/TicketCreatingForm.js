@@ -22,10 +22,17 @@ class TicketCreatingForm extends Component {
 	}
 
 	render() {
-		const { users, handleCreateFormFieldUpdate, handleCancel, loggedInUser } = this.props;
+		const { users, handleCreateFormFieldUpdate, handleCancel, loggedInUser, errors } = this.props;
 
 		return (
 			<form onSubmit={this.onSubmit}>
+				{errors != null && (
+		            <ul>
+		            	{Object.keys(errors).map( errorKey => (
+		            		errors[errorKey] == null ? '' : <li>{errors[errorKey]}</li>
+		            	))}
+		            </ul>
+          		)}
 				<div>
 					<label htmlFor="title">Title:</label>
 					<input type="text" id="title" onChange={e => handleCreateFormFieldUpdate(e.target.id, e.target.value)}/><br/>
@@ -53,6 +60,7 @@ const mapStateToTicketCreatingFormProps = (state) => {
 		users: getUsers(state),
 		loggedInUser: getAuthentication(state).user,
 		createForm: getCreateForm(state),
+		errors: getCreateForm(state).errors,
 	}
 };
 

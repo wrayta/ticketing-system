@@ -1,7 +1,11 @@
 const initialState = {
 	title: null,
 	description: null,
-	assignee: null
+	assignee: null,
+	errors: {
+		title: null,
+		description: null,
+	}
 };
 
 const createForm = (state = initialState, action) => {
@@ -27,6 +31,15 @@ const createForm = (state = initialState, action) => {
 			return {
 				...state,
 				description: action.values
+			};
+
+		case 'CREATE_TICKET_ERROR':
+			return {
+				...state,
+				errors: {
+					...state.errors,
+					[action.error_field]: action.values
+				}
 			};
 
 		default:

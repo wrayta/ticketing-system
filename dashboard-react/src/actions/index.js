@@ -224,33 +224,70 @@ export const handleUserLoginFormFieldUpdate = (formFieldId, value) => (dispatch,
 				values: value
 			});
 			break;
+
 		case 'password':
 			dispatch({
 				type: 'UPDATE_LOGIN_PASSWORD',
 				values: value
 			});
+			break;
+
+		default:
+			break;
 	}
 };
 
 export const handleCreateFormFieldUpdate = (formFieldId, value) => (dispatch, getState) => {
 	switch (formFieldId) {
 		case 'title':
+			if(value.trim().length <= 0 || value == null) {
+				dispatch({
+					type: 'CREATE_TICKET_ERROR',
+					values: "'Title' is a required field",
+					error_field: 'title'
+				});
+			} else {
+				dispatch({
+					type: 'CREATE_TICKET_ERROR',
+					values: null,
+					error_field: 'title'
+				});
+			}
 			dispatch({
 				type: 'UPDATE_CREATE_TITLE',
 				values: value
 			});
 			break;
+
 		case 'description':
+			if(value.trim().length <= 0 || value == null) {
+				dispatch({
+					type: 'CREATE_TICKET_ERROR',
+					values: "'Description' is a required field",
+					error_field: 'description'
+				});
+			} else {
+				dispatch({
+					type: 'CREATE_TICKET_ERROR',
+					values: null,
+					error_field: 'description'
+				});
+			}
+
 			dispatch({
 				type: 'UPDATE_CREATE_DESCRIPTION',
 				values: value
 			});
 			break;
+
 		case 'assignee':
 			dispatch({
 				type: 'UPDATE_CREATE_ASSIGNEE',
 				values: value
 			});
+			break;
+
+		default: 
 			break;
 	}
 };
