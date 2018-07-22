@@ -107,7 +107,13 @@ export const editTicket = (id) => (dispatch, getState) => {
 export const handleRegisterFormFieldUpdate = (formFieldId, value) => (dispatch, getState) => {
 	switch (formFieldId) {
 		case 'first_name':
-			if (!/^[a-zA-Z]+$/.test(value)) {
+			if (value.trim().length <= 0 || value == null) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'First name' is a required field",
+					error_field: 'first_name'
+				});
+			} else if (!/^[a-zA-Z]+$/.test(value)) {
 				dispatch({
 					type: 'REGISTRATION_ERROR',
 					values: "'First name' must contain only letters",
@@ -128,7 +134,13 @@ export const handleRegisterFormFieldUpdate = (formFieldId, value) => (dispatch, 
 			break;
 
 		case 'last_name':
-			if (!/^[a-zA-Z]+$/.test(value)) {
+			if (value.trim().length <= 0 || value == null) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'Last name' is a required field",
+					error_field: 'last_name'
+				});
+			} else if (!/^[a-zA-Z]+$/.test(value)) {
 				dispatch({
 					type: 'REGISTRATION_ERROR',
 					values: "'Last name' must contain only letters",
@@ -149,10 +161,16 @@ export const handleRegisterFormFieldUpdate = (formFieldId, value) => (dispatch, 
 			break;
 
 		case 'email':
-			if (!/^[a-z]+\.+[a-z]+@+[a-z]+\.+[a-z]+$/.test(value)) {
+			if (value.trim().length <= 0 || value == null) {
 				dispatch({
 					type: 'REGISTRATION_ERROR',
-					values: "'Email' must be of the format 'test@test.test'",
+					values: "'Email' is a required field",
+					error_field: 'email'
+				});
+			} else if (!/^[a-z]+\.+[a-z]+@+[a-z]+\.+[a-z]+$/.test(value)) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'Email' must be of the format 'test.test@test.test'",
 					error_field: 'email'
 				});
 			} else {
@@ -170,7 +188,13 @@ export const handleRegisterFormFieldUpdate = (formFieldId, value) => (dispatch, 
 			break;
 
 		case 'username':
-			if (!/^[a-z]+\.+[a-z]+$/.test(value)) {
+			if (value.trim().length <= 0 || value == null) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'Username' is a required field",
+					error_field: 'username'
+				});
+			} else if (!/^[a-z]+\.+[a-z]+$/.test(value)) {
 				dispatch({
 					type: 'REGISTRATION_ERROR',
 					values: "'Username' must be of the format 'test.test'",
@@ -191,7 +215,13 @@ export const handleRegisterFormFieldUpdate = (formFieldId, value) => (dispatch, 
 			break;
 
 		case 'password':
-			if (!/^[a-zA-Z]+$/.test(value)) {
+			if (value.trim().length <= 0 || value == null) {
+				dispatch({
+					type: 'REGISTRATION_ERROR',
+					values: "'Password' is a required field",
+					error_field: 'password'
+				});
+			} else if (!/^[a-zA-Z]+$/.test(value)) {
 				dispatch({
 					type: 'REGISTRATION_ERROR',
 					values: "'Password' must contain only letters",
@@ -297,6 +327,19 @@ export const handleEditFormFieldUpdate = (formFieldId, value) => (dispatch, getS
 
 	switch (formFieldId) {
 		case 'title':
+			if(value.trim().length <= 0 || value == null) {
+				dispatch({
+					type: 'EDIT_TICKET_ERROR',
+					values: "'Title' is a required field",
+					error_field: 'title'
+				});
+			} else {
+				dispatch({
+					type: 'EDIT_TICKET_ERROR',
+					values: null,
+					error_field: 'title'
+				});
+			}
 			dispatch({
 				type: 'UPDATE_EDIT_TITLE',
 				values: value
@@ -304,6 +347,19 @@ export const handleEditFormFieldUpdate = (formFieldId, value) => (dispatch, getS
 			break;
 
 		case 'description':
+			if(value.trim().length <= 0 || value == null) {
+				dispatch({
+					type: 'EDIT_TICKET_ERROR',
+					values: "'Description' is a required field",
+					error_field: 'description'
+				});
+			} else {
+				dispatch({
+					type: 'EDIT_TICKET_ERROR',
+					values: null,
+					error_field: 'description'
+				});
+			}
 			dispatch({
 				type: 'UPDATE_EDIT_DESCRIPTION',
 				values: value

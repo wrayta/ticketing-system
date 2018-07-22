@@ -28,19 +28,19 @@ class TicketCreatingForm extends Component {
 			<form onSubmit={this.onSubmit}>
 				{errors != null && (
 		            <ul>
-		            	{Object.keys(errors).map( errorKey => (
-		            		errors[errorKey] == null ? '' : <li>{errors[errorKey]}</li>
+		            	{Object.keys(errors).map( (errorKey, i) => (
+		            		errors[errorKey] == null ? '' : <li key={i}>{errors[errorKey]}</li>
 		            	))}
 		            </ul>
           		)}
 				<div>
 					<label htmlFor="title">Title:</label>
-					<input type="text" id="title" onChange={e => handleCreateFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+					<input type="text" id="title" onBlur={e => handleCreateFormFieldUpdate(e.target.id, e.target.value)} onChange={e => handleCreateFormFieldUpdate(e.target.id, e.target.value)}/><br/>
 				</div>
 
 				<div>
 					<label htmlFor="description">Description:</label>
-					<input type="textarea" id="description" onChange={e => handleCreateFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+					<input type="textarea" id="description" onBlur={e => handleCreateFormFieldUpdate(e.target.id, e.target.value)} onChange={e => handleCreateFormFieldUpdate(e.target.id, e.target.value)}/><br/>
 				</div>
 
 				<div>

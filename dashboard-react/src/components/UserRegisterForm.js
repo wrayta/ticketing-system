@@ -21,34 +21,39 @@ class UserRegisterForm extends Component {
 			<form onSubmit={this.onSubmit}>
 				{errors != null && (
 		            <ul>
-		            	{Object.keys(errors).map( errorKey => (
-		            		errors[errorKey] == null ? '' : <li>{errors[errorKey]}</li>
+		            	{Object.keys(errors).map( (errorKey, i) => (
+		            		errors[errorKey] == null ? '' : <li key={i}>{errors[errorKey]}</li>
 		            	))}
 		            </ul>
           		)}
 				<div>
 					<label>First Name:</label>
-					<input type="text" id="first_name" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+					<input type="text" id="first_name" onBlur={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)} 
+						onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
 				</div>
 
 				<div>
 					<label>Last Name:</label>
-					<input type="text" id="last_name" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+					<input type="text" id="last_name" onBlur={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)} 
+						onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
 				</div>
 
 				<div>
 					<label>Email:</label>
-					<input type="text" id="email" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+					<input type="text" id="email" onBlur={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)} 
+						onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
 				</div>
 
 				<div>
 					<label>Username:</label>
-					<input type="text" id="username" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+					<input type="text" id="username" onBlur={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)} 
+						onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
 				</div>
 
 				<div>
 					<label>Password:</label>
-					<input type="password" id="password" onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
+					<input type="password" id="password" onBlur={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)} 
+						onChange={e => handleRegisterFormFieldUpdate(e.target.id, e.target.value)}/><br/>
 				</div>
 
 				<button type="submit">Sign Up</button>

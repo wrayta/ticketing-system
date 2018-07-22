@@ -3,7 +3,11 @@ const initialState = {
 	title: null,
 	description: null,
 	status: null,
-	assignee: null
+	assignee: null,
+	errors: {
+		title: null,
+		description: null,
+	}
 };
 
 const editForm = (state = initialState, action) => {
@@ -45,6 +49,14 @@ const editForm = (state = initialState, action) => {
 			return {
 				...state,
 				assignee: action.values
+			};
+		case 'EDIT_TICKET_ERROR':
+			return {
+				...state,
+				errors: {
+					...state.errors,
+					[action.error_field]: action.values
+				}
 			};
 
 		default:

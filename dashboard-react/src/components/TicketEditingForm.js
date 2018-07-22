@@ -28,6 +28,13 @@ class TicketEditingForm extends Component {
 
 		return (
 			<form onSubmit={this.onSubmit} key={ticket.id}>
+				{errors != null && (
+		            <ul>
+		            	{Object.keys(errors).map( (errorKey, i) => (
+		            		errors[errorKey] == null ? '' : <li key={i}>{errors[errorKey]}</li>
+		            	))}
+		            </ul>
+          		)}
 				<div>
 					<label htmlFor="title">Title:</label>
 					<input type="text" id="title" defaultValue={ticket.title} onChange={e => handleEditFormFieldUpdate(e.target.id, e.target.value)}/><br/>
@@ -79,7 +86,8 @@ const mapStateToTicketEditingFormProps = (state) => {
 		ticket: getTicketToEdit(state),
 		editForm: getEditForm(state),
 		users: getUsers(state),
-		loggedInUser: getAuthentication(state).user
+		loggedInUser: getAuthentication(state).user,
+		errors: getEditForm(state).errors,
 	}
 };
 
